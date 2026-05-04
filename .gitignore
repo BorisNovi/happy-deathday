@@ -42,8 +42,10 @@ yarn.lock
 .settings/
 *.sublime-workspace
 
-# Environment
+# Environment & secrets
 .env
+appsettings.Production.json
+appsettings.local.json
 
 # System
 .DS_Store
