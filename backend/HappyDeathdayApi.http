@@ -1,6 +1,17 @@
-@HappyDeathdayApi_HostAddress = http://localhost:5209
+@host = http://localhost:5209
+@cardId = <uuid>
 
-GET {{HappyDeathdayApi_HostAddress}}/weatherforecast/
-Accept: application/json
+### Создать карточку
+POST {{host}}/api/cards
+Content-Type: application/json
 
-###
+{
+  "recipientName": "User",
+  "birthDate": "1990-05-04"
+}
+
+### Получить карточку по Id
+GET {{host}}/api/cards/{{cardId}}
+
+## Получить все карточки
+GET {{host}}/api/cards
