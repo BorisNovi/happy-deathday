@@ -1,0 +1,20 @@
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '@environments';
+import { ICard, ICardCreate } from '@shared';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CardApi {
+  readonly #http = inject(HttpClient);
+
+  protected fetchCard(id: string): Observable<ICard> {
+    return this.#http.get<ICard>(`${environment.apiUrl}/card/${id}`);
+  }
+
+  protected createCard(body: ICardCreate): Observable<ICard> {
+    return this.#http.post<ICard>(`${environment.apiUrl}/card`, body);
+  }
+}
