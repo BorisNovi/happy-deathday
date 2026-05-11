@@ -10,11 +10,11 @@ import { ICard, ICardCreate } from '@shared';
 export class CardApi {
   readonly #http = inject(HttpClient);
 
-  protected fetchCard(id: string): Observable<ICard> {
+  getById(id: string): Observable<ICard> {
     return this.#http.get<ICard>(`${environment.apiUrl}/card/${id}`);
   }
 
-  protected createCard(body: ICardCreate): Observable<ICard> {
+  create(body: ICardCreate): Observable<ICard> {
     return this.#http.post<ICard>(`${environment.apiUrl}/card`, body);
   }
 }

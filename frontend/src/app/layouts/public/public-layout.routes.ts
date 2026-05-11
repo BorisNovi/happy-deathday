@@ -13,9 +13,13 @@ export const publicLayoutRoutes: Routes = [
       // ...routes,
       {
         path: 'card-creation',
-        title: 'Card',
-        // resolve: { data: resolver },
+        title: 'Создать открытку',
         loadComponent: () => import('./components').then(c => c.CreateCardComponent),
+      },
+      {
+        path: 'card-preview',
+        title: 'Предпросмотр открытки',
+        loadComponent: () => import('./components').then(c => c.CardPreviewComponent),
       },
     ],
   },

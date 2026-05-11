@@ -1,1 +1,43 @@
-<p>create-card works!</p>
+<div class="create-card">
+  <h1 class="create-card__title">Создать открытку</h1>
+  <p class="create-card__subtitle">Введите данные получателя — мы посчитаем, сколько времени ещё впереди.</p>
+
+  <form
+    class="create-card__form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    aria-label="Форма создания открытки"
+  >
+    <tui-textfield>
+      <label tuiLabel for="recipientName">Имя получателя</label>
+      <input
+        id="recipientName"
+        tuiInput
+        type="text"
+        formControlName="recipientName"
+        placeholder="Например, Евгения"
+        autocomplete="off"
+      />
+    </tui-textfield>
+
+    <tui-textfield>
+      <label tuiLabel for="birthDate">Дата рождения</label>
+      <input
+        id="birthDate"
+        tuiInputDate
+        formControlName="birthDate"
+        [max]="maxDate"
+      />
+      <tui-calendar *tuiDropdown/>
+    </tui-textfield>
+
+    <button
+      tuiButton
+      type="submit"
+      size="l"
+      [style.width.%]="100"
+    >
+      Предпросмотр →
+    </button>
+  </form>
+</div>

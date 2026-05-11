@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 2rem 1rem;
+  background: var(--cream);
+}
+
+.create-card {
+  width: 100%;
+  max-width: 420px;
+
+  &__title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  &__subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+}

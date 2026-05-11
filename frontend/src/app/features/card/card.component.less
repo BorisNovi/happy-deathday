@@ -1,0 +1,24 @@
+:host {
+  display: block;
+}
+
+.card-page {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: var(--cream);
+
+  &__loading,
+  &__error {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9rem;
+    text-align: center;
+    color: var(--muted);
+  }
+
+  &__error {
+    color: var(--accent);
+  }
+}

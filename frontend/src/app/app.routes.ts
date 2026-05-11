@@ -18,13 +18,19 @@ export const routes: Routes = [
     canActivate: [],
     loadChildren: () => import('./layouts').then(c => c.publicLayoutRoutes),
   },
+  {
+    path: 'card/:id',
+    title: 'Happy Deathday!',
+    loadComponent: () => import('./features').then(c => c.CardComponent),
+  },
   // {
   //   path: 'auth',
   //   canActivate: [loggedInGuard],
   //   loadChildren: () => import('./features').then(c => c.authRoutes),
   // },
-  // {
-  //   path: '**',
-  //   loadComponent: () => import('./features').then(c => c.NotFoundComponent),
-  // },
+  {
+    path: '**',
+    title: '404 — Страница мертва',
+    loadComponent: () => import('./features').then(c => c.NotFoundComponent),
+  },
 ];

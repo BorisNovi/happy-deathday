@@ -1,0 +1,39 @@
+@if (formData(); as data) {
+  <div class="card-preview">
+    <app-card-display
+      [recipientName]="data.recipientName"
+      [birthDate]="data.birthDate"
+      [deathDate]="estimatedDeathDate()"
+    />
+
+    <div class="card-preview__actions">
+      <button
+        tuiButton
+        type="button"
+        appearance="outline"
+        size="m"
+        (click)="goBack()"
+      >
+        ← Назад
+      </button>
+
+      <button
+        tuiButton
+        type="button"
+        size="m"
+        [disabled]="loading()"
+        (click)="submit()"
+      >
+        @if (loading()) {
+          Сохраняем…
+        } @else {
+          Поделиться →
+        }
+      </button>
+    </div>
+
+    <p class="card-preview__note">
+      Дата смерти на превью — приблизительная. Точная рассчитывается на сервере по данным ВОЗ.
+    </p>
+  </div>
+}

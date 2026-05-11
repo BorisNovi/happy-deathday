@@ -1,0 +1,63 @@
+<article class="card" lang="ru">
+  <span class="card__corner card__corner--tr" aria-hidden="true"></span>
+  <span class="card__corner card__corner--bl" aria-hidden="true"></span>
+
+  <header class="card__header">
+    <p class="card__eyebrow">{{ birthDateFormatted() }} — ещё один оборот</p>
+    <h1 class="card__title">
+      С днём рождения,<br>
+      <span class="card__title-name">{{ recipientName() }}</span>
+    </h1>
+    @if (ageDisplay()) {
+      <span class="card__badge">{{ ageDisplay() }}</span>
+    }
+  </header>
+
+  <div class="card__divider" aria-hidden="true">
+    <span class="card__divider-icon">✦</span>
+  </div>
+
+  <p class="card__message">{{ message() }}</p>
+
+  <p class="card__countdown-label">Осталось до {{ deathDateLabel() }}</p>
+
+  <div class="card__countdown" role="timer" aria-label="Обратный отсчёт до конца жизни">
+    <div class="card__unit">
+      <span class="card__num">{{ daysDisplay() }}</span>
+      <span class="card__unit-label">дней</span>
+    </div>
+    <span class="card__sep" aria-hidden="true">:</span>
+    <div class="card__unit">
+      <span class="card__num">{{ hoursDisplay() }}</span>
+      <span class="card__unit-label">часов</span>
+    </div>
+    <span class="card__sep" aria-hidden="true">:</span>
+    <div class="card__unit">
+      <span class="card__num">{{ minsDisplay() }}</span>
+      <span class="card__unit-label">минут</span>
+    </div>
+    <span class="card__sep" aria-hidden="true">:</span>
+    <div class="card__unit">
+      <span class="card__num" [class.card__num--flash]="flash()">{{ secsDisplay() }}</span>
+      <span class="card__unit-label">секунд</span>
+    </div>
+  </div>
+
+  <div
+    class="card__progress"
+    role="progressbar"
+    [attr.aria-valuenow]="progress()"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-label="Прожито процентов жизни"
+  >
+    <div class="card__progress-bar" [style.width.%]="progress()"></div>
+  </div>
+  <p class="card__stats">
+    Прожито {{ progressDisplay() }}% · ожидаемая продолжительность {{ lifeExpectancy() }} (ВОЗ, 2024)
+  </p>
+
+  @if (quote()) {
+    <footer class="card__quote">{{ quote() }}</footer>
+  }
+</article>

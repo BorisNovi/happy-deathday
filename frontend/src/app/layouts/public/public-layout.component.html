@@ -1,6 +1,16 @@
 <div class="layout-wrapper">
   <!-- <app-topbar></app-topbar> -->
   <!-- <app-sidebar></app-sidebar> -->
+  <button
+    tuiIconButton
+    type="button"
+    appearance="ghost"
+    size="m"
+    class="theme-toggle"
+    [iconStart]="darkMode() ? '@tui.sun' : '@tui.moon'"
+    [attr.aria-label]="darkMode() ? 'Включить светлую тему' : 'Включить тёмную тему'"
+    (click)="toggle()"
+  ></button>
   <div class="layout-main-container">
     <div class="layout-main">
       <router-outlet></router-outlet>
