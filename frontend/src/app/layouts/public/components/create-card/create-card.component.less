@@ -11,26 +11,56 @@
   width: 100%;
   max-width: 420px;
 
+  &__eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.75rem;
+  }
+
   &__title {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: clamp(1.75rem, 5vw, 2.5rem);
     font-weight: 400;
     color: var(--ink);
-    margin-bottom: 0.5rem;
+    margin: 0 0 1.25rem;
     line-height: 1.2;
   }
 
-  &__subtitle {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-bottom: 2rem;
-    line-height: 1.6;
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+  }
+
+  &__divider {
+    border: none;
+    border-top: 1px solid var(--pale);
+    margin: 1.75rem 0;
   }
 
   &__form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0.5rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+
+    tui-error {
+      min-height: 1.5rem;
+    }
   }
 }

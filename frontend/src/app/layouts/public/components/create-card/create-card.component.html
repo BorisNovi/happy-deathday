@@ -1,6 +1,18 @@
 <div class="create-card">
-  <h1 class="create-card__title">Создать открытку</h1>
-  <p class="create-card__subtitle">Введите данные получателя — мы посчитаем, сколько времени ещё впереди.</p>
+  <p class="create-card__eyebrow" aria-hidden="true">☽ Happy Deathday</p>
+  <h1 class="create-card__title">Открытка&nbsp;с обратным отсчётом</h1>
+
+  <div class="create-card__intro" role="note">
+    <p>
+      Поздравление, которое не врёт. Вместо «ещё один год позади» — «вот сколько осталось».
+    </p>
+    <p>
+      Мы рассчитаем предполагаемую дату смерти по данным ВОЗ и создадим персональную
+      открытку с таймером. Отправьте её тому, кто ценит честность.
+    </p>
+  </div>
+
+  <hr class="create-card__divider" aria-hidden="true" />
 
   <form
     class="create-card__form"
@@ -8,6 +20,7 @@
     (ngSubmit)="onSubmit()"
     aria-label="Форма создания открытки"
   >
+  <div class="create-card__field">
     <tui-textfield>
       <label tuiLabel for="recipientName">Имя получателя</label>
       <input
@@ -19,17 +32,22 @@
         autocomplete="off"
       />
     </tui-textfield>
+    <tui-error formControlName="recipientName" />
+  </div>
 
-    <tui-textfield>
-      <label tuiLabel for="birthDate">Дата рождения</label>
-      <input
-        id="birthDate"
-        tuiInputDate
-        formControlName="birthDate"
-        [max]="maxDate"
-      />
-      <tui-calendar *tuiDropdown/>
-    </tui-textfield>
+    <div class="create-card__field">
+      <tui-textfield>
+        <label tuiLabel for="birthDate">Дата рождения</label>
+        <input
+          id="birthDate"
+          tuiInputDate
+          formControlName="birthDate"
+          [max]="maxDate"
+        />
+        <tui-calendar *tuiDropdown/>
+      </tui-textfield>
+      <tui-error formControlName="birthDate" />
+    </div>
 
     <button
       tuiButton

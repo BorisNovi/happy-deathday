@@ -51,7 +51,6 @@ export class CardDisplayComponent {
   }
 
   #pluralYears(n: number): string {
-    console.log(n)
     const m10 = n % 10, m100 = n % 100;
     if (m100 >= 11 && m100 <= 14)
       return 'лет';
@@ -119,11 +118,13 @@ export class CardDisplayComponent {
 
   protected readonly lifeExpectancy = computed<string>(() => {
     const span = this.deathDate().getTime() - this.birthDate().getTime();
-    return this.#pluralYears(Math.round(span / (365.25 * 86_400_000)));
+    const years = Math.round(span / (365.25 * 86_400_000));
+    return `${years} ${this.#pluralYears(years)}`;
   });
 
   protected readonly message = computed<string>(() => {
     const p = this.progress();
+    console.log(p)
     if (p < 25)
       return 'Большая часть пути ещё впереди. Самое время начать думать о важном.';
     if (p < 50)
