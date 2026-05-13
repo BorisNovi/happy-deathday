@@ -20,6 +20,16 @@
     (ngSubmit)="onSubmit()"
     aria-label="Форма создания открытки"
   >
+    <tui-textfield [tuiTextfieldCleaner]="false">
+      <label tuiLabel>Язык открытки</label>
+      <input tuiSelect formControlName="lang" />
+      <tui-data-list *tuiDropdown>
+        @for (opt of langOptions; track opt.value) {
+          <button tuiOption type="button" [value]="opt">{{ opt.label }}</button>
+        }
+      </tui-data-list>
+    </tui-textfield>
+
   <div class="create-card__field">
     <tui-textfield>
       <label tuiLabel for="recipientName">Имя получателя</label>
@@ -58,4 +68,9 @@
       Предпросмотр →
     </button>
   </form>
+
+  <!-- TODO: удалить, когда будут переводы -->
+  <span>
+    {{'TEST' | translate}}
+  </span>
 </div>

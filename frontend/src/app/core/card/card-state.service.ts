@@ -3,6 +3,7 @@ import { Injectable, signal } from '@angular/core';
 export interface ICardFormState {
   recipientName: string;
   birthDate: Date;
+  lang: string;
 }
 
 @Injectable({ providedIn: 'root' })

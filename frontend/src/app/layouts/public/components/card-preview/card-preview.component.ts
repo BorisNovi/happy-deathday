@@ -55,7 +55,7 @@ export class CardPreviewComponent {
 
     this.loading.set(true);
     this.#cardApi
-      .create({ recipientName: data.recipientName, birthDate: data.birthDate })
+      .create({ recipientName: data.recipientName, birthDate: data.birthDate, lang: data.lang })
       .pipe(
         takeUntilDestroyed(this.#destroy),
         finalize(() => this.loading.set(false)),

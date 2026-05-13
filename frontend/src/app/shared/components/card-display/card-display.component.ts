@@ -124,7 +124,6 @@ export class CardDisplayComponent {
 
   protected readonly message = computed<string>(() => {
     const p = this.progress();
-    console.log(p)
     if (p < 25)
       return 'Большая часть пути ещё впереди. Самое время начать думать о важном.';
     if (p < 50)
