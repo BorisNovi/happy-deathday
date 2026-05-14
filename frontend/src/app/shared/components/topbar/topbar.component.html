@@ -1,0 +1,30 @@
+<button
+  tuiButton
+  type="button"
+  appearance="flat"
+  size="m"
+  [tuiDropdown]="langDropdown"
+  [(tuiDropdownOpen)]="dropdownOpen"
+  aria-label="Выбрать язык"
+>
+  <tui-icon icon="@tui.languages" />
+  {{ currentLang().label }}
+</button>
+
+<ng-template #langDropdown>
+  <tui-data-list>
+    @for (opt of langOptions; track opt.value) {
+      <button tuiOption type="button" (click)="changeLang(opt)">{{ opt.label }}</button>
+    }
+  </tui-data-list>
+</ng-template>
+
+<button
+  tuiIconButton
+  type="button"
+  appearance="flat"
+  size="m"
+  [iconStart]="darkMode() ? '@tui.sun' : '@tui.moon'"
+  [attr.aria-label]="darkMode() ? 'Включить светлую тему' : 'Включить тёмную тему'"
+  (click)="toggleTheme()"
+></button>

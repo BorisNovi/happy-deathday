@@ -1,19 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CardStateService, LanguageService } from '@core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ILanguageOption } from '@shared';
 import { TuiDay } from '@taiga-ui/cdk';
-import { TuiButton, TuiDataList, TuiError, TuiInput } from '@taiga-ui/core';
-import { tuiItemsHandlersProvider } from '@taiga-ui/core/directives/items-handlers';
+import { TuiButton, TuiError, TuiInput } from '@taiga-ui/core';
 import { tuiValidationErrorsProvider } from '@taiga-ui/core/tokens';
-import { TuiInputDate, TuiSelect } from '@taiga-ui/kit';
+import { TuiInputDate } from '@taiga-ui/kit';
 
 @Component({
   selector: 'app-create-card',
-  imports: [ReactiveFormsModule, TuiInput, TuiInputDate, TuiButton, TuiError, TuiSelect, TuiDataList, TranslatePipe],
+  imports: [ReactiveFormsModule, TuiInput, TuiInputDate, TuiButton, TuiError, TranslatePipe],
   templateUrl: './create-card.component.html',
   styleUrl: './create-card.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,11 +19,7 @@ import { TuiInputDate, TuiSelect } from '@taiga-ui/kit';
       required: 'Обязательное поле',
       maxlength: ({ requiredLength }: { requiredLength: number }) =>
         `Не более ${requiredLength} символов`,
-    }),
-    tuiItemsHandlersProvider<ILanguageOption>({
-      stringify: signal((o: ILanguageOption) => o.label),
-      identityMatcher: signal((a: ILanguageOption, b: ILanguageOption) => a.value === b.value),
-    }),
+    })
   ],
 })
 export class CreateCardComponent {
@@ -36,10 +29,8 @@ export class CreateCardComponent {
   readonly #langService = inject(LanguageService);
 
   protected readonly maxDate = TuiDay.currentLocal();
-  protected readonly langOptions = this.#langService.languageOptions;
 
   protected readonly form = this.#fb.group({
-    lang: this.#fb.nonNullable.control(this.#langService.currentLanguageOption()),
     recipientName: this.#fb.nonNullable.control('', [Validators.required, Validators.maxLength(30)]),
     birthDate: this.#fb.control<TuiDay | null>(null, Validators.required),
   });
@@ -50,16 +41,8 @@ export class CreateCardComponent {
       this.form.patchValue({
         recipientName: saved.recipientName,
         birthDate: TuiDay.fromLocalNativeDate(saved.birthDate),
-        lang: this.#langService.languageOptions.find(o => o.value === saved.lang),
       });
     }
-
-    this.form.controls.lang.valueChanges
-      .pipe(takeUntilDestroyed())
-      .subscribe(opt => {
-        if (opt)
-          this.#langService.changeLanguage(opt.value);
-      });
   }
 
   protected onSubmit(): void {
@@ -68,10 +51,10 @@ export class CreateCardComponent {
       return;
     }
 
-    const { lang, recipientName, birthDate } = this.form.getRawValue();
+    const { recipientName, birthDate } = this.form.getRawValue();
 
     this.#state.set({
-      lang: lang.value,
+      lang: this.#langService.currentLanguageOption().value,
       recipientName,
       birthDate: birthDate!.toLocalNativeDate(),
     });
