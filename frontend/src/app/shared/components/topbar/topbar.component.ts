@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '@core';
 import { ILanguageOption } from '@shared';
 import { TUI_DARK_MODE, TuiButton, TuiDataList, TuiDropdown, TuiIcon } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-topbar',
-  imports: [TuiButton, TuiDataList, TuiDropdown, TuiIcon],
+  imports: [TuiButton, TuiDataList, TuiDropdown, TuiIcon, TranslatePipe],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,

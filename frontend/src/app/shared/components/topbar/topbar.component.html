@@ -5,7 +5,7 @@
   size="m"
   [tuiDropdown]="langDropdown"
   [(tuiDropdownOpen)]="dropdownOpen"
-  aria-label="Выбрать язык"
+  [attr.aria-label]="'topbar.lang' | translate"
 >
   <tui-icon icon="@tui.languages" />
   {{ currentLang().label }}
@@ -25,6 +25,6 @@
   appearance="flat"
   size="m"
   [iconStart]="darkMode() ? '@tui.sun' : '@tui.moon'"
-  [attr.aria-label]="darkMode() ? 'Включить светлую тему' : 'Включить тёмную тему'"
+  [attr.aria-label]="(darkMode() ? 'topbar.theme.light' : 'topbar.theme.dark') | translate"
   (click)="toggleTheme()"
 ></button>

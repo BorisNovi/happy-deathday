@@ -1,15 +1,10 @@
 <div class="create-card">
   <p class="create-card__eyebrow" aria-hidden="true">☽ Happy Deathday</p>
-  <h1 class="create-card__title">Открытка&nbsp;с обратным отсчётом</h1>
+  <h1 class="create-card__title">{{ 'createCard.title' | translate }}</h1>
 
   <div class="create-card__intro" role="note">
-    <p>
-      Поздравление, которое не врёт. Вместо «ещё один год позади» — «вот сколько осталось».
-    </p>
-    <p>
-      Мы рассчитаем предполагаемую дату смерти по данным ВОЗ и создадим персональную
-      открытку с таймером. Отправьте её тому, кто ценит честность.
-    </p>
+    <p>{{ 'createCard.intro.p1' | translate }}</p>
+    <p>{{ 'createCard.intro.p2' | translate }}</p>
   </div>
 
   <hr class="create-card__divider" aria-hidden="true" />
@@ -18,27 +13,26 @@
     class="create-card__form"
     [formGroup]="form"
     (ngSubmit)="onSubmit()"
-    aria-label="Форма создания открытки"
+    [attr.aria-label]="'createCard.form.ariaLabel' | translate"
   >
-
-  <div class="create-card__field">
-    <tui-textfield>
-      <label tuiLabel for="recipientName">Имя получателя</label>
-      <input
-        id="recipientName"
-        tuiInput
-        type="text"
-        formControlName="recipientName"
-        placeholder="Например, Евгения"
-        autocomplete="off"
-      />
-    </tui-textfield>
-    <tui-error formControlName="recipientName" />
-  </div>
+    <div class="create-card__field">
+      <tui-textfield>
+        <label tuiLabel for="recipientName">{{ 'createCard.form.name.label' | translate }}</label>
+        <input
+          id="recipientName"
+          tuiInput
+          type="text"
+          formControlName="recipientName"
+          [placeholder]="'createCard.form.name.placeholder' | translate"
+          autocomplete="off"
+        />
+      </tui-textfield>
+      <tui-error formControlName="recipientName" />
+    </div>
 
     <div class="create-card__field">
       <tui-textfield>
-        <label tuiLabel for="birthDate">Дата рождения</label>
+        <label tuiLabel for="birthDate">{{ 'createCard.form.birthDate.label' | translate }}</label>
         <input
           id="birthDate"
           tuiInputDate
@@ -56,12 +50,7 @@
       size="l"
       [style.width.%]="100"
     >
-      Предпросмотр →
+      {{ 'createCard.form.submit' | translate }}
     </button>
   </form>
-
-  <!-- TODO: удалить, когда будут переводы -->
-  <span>
-    {{'TEST' | translate}}
-  </span>
 </div>

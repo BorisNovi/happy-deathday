@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CardStateService, LanguageService } from '@core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { TuiDay } from '@taiga-ui/cdk';
 import { TuiButton, TuiError, TuiInput } from '@taiga-ui/core';
-import { tuiValidationErrorsProvider } from '@taiga-ui/core/tokens';
+import { TUI_VALIDATION_ERRORS } from '@taiga-ui/core/tokens';
 import { TuiInputDate } from '@taiga-ui/kit';
 
 @Component({
@@ -15,11 +15,18 @@ import { TuiInputDate } from '@taiga-ui/kit';
   styleUrl: './create-card.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    tuiValidationErrorsProvider({
-      required: 'Обязательное поле',
-      maxlength: ({ requiredLength }: { requiredLength: number }) =>
-        `Не более ${requiredLength} символов`,
-    })
+    {
+      provide: TUI_VALIDATION_ERRORS,
+      useFactory: (translate: TranslateService, langService: LanguageService) => ({
+        required: computed(() => {
+          langService.currentLang();
+          return translate.instant('validation.required');
+        }),
+        maxlength: ({ requiredLength }: { requiredLength: number }) =>
+          translate.instant('validation.maxlength', { requiredLength }),
+      }),
+      deps: [TranslateService, LanguageService],
+    },
   ],
 })
 export class CreateCardComponent {
@@ -54,9 +61,9 @@ export class CreateCardComponent {
     const { recipientName, birthDate } = this.form.getRawValue();
 
     this.#state.set({
-      lang: this.#langService.currentLanguageOption().value,
       recipientName,
       birthDate: birthDate!.toLocalNativeDate(),
+      lang: this.#langService.currentLanguageOption().value,
     });
 
     this.#router.navigate(['/public/card-preview']);

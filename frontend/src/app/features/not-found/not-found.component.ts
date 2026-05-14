@@ -1,22 +1,23 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { TuiButton } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-not-found',
-  imports: [RouterLink, TuiButton],
+  imports: [RouterLink, TuiButton, TranslatePipe],
   styleUrl: './not-found.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <main class="not-found" role="main">
       <p class="not-found__code">404</p>
-      <h1 class="not-found__title">Страница мертва</h1>
+      <h1 class="not-found__title">{{ 'notFound.title' | translate }}</h1>
       <p class="not-found__message">
-        Она существовала, но время взяло своё.<br />
-        Или её никогда не было — кто знает.
+        {{ 'notFound.message1' | translate }}<br />
+        {{ 'notFound.message2' | translate }}
       </p>
       <a tuiButton routerLink="/public" size="m" appearance="outline">
-        ← Вернуться к началу
+        {{ 'notFound.back' | translate }}
       </a>
     </main>
   `,

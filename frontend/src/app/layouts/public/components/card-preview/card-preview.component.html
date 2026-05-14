@@ -14,7 +14,7 @@
         size="m"
         (click)="goBack()"
       >
-        ← Назад
+        {{ 'common.back' | translate }}
       </button>
 
       <button
@@ -25,15 +25,15 @@
         (click)="submit()"
       >
         @if (loading()) {
-          Сохраняем…
+          {{ 'preview.saving' | translate }}
         } @else {
-          Поделиться →
+          {{ 'preview.share' | translate }}
         }
       </button>
     </div>
 
     <p class="card-preview__note">
-      Дата смерти на превью — приблизительная. Точная рассчитывается на сервере по данным ВОЗ.
+      {{ 'preview.note' | translate }}
     </p>
   </div>
 }

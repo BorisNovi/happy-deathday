@@ -1,3 +1,85 @@
 {
-  "TEST": "Test translation - en"
+  "common": {
+    "back": "← Back"
+  },
+  "topbar": {
+    "lang": "Select language",
+    "theme": {
+      "light": "Switch to light theme",
+      "dark": "Switch to dark theme"
+    }
+  },
+  "createCard": {
+    "title": "A countdown card",
+    "intro": {
+      "p1": "A greeting that doesn't lie. Instead of \"another year behind\" — \"here's how much is left\".",
+      "p2": "We'll calculate your estimated death date using WHO data and create a personalised card with a timer. Send it to someone who values honesty."
+    },
+    "form": {
+      "ariaLabel": "Card creation form",
+      "lang": "Card language",
+      "name": {
+        "label": "Recipient's name",
+        "placeholder": "E.g. Eugenia"
+      },
+      "birthDate": {
+        "label": "Date of birth"
+      },
+      "submit": "Preview →"
+    }
+  },
+  "validation": {
+    "required": "Required field",
+    "maxlength": "No more than {{requiredLength}} characters"
+  },
+  "preview": {
+    "saving": "Saving…",
+    "share": "Share →",
+    "note": "The death date in the preview is approximate. The exact date is calculated on the server using WHO data."
+  },
+  "card": {
+    "loading": "Loading card…",
+    "notFound": "Card not found or has expired.",
+    "header": {
+      "eyebrow": "— one more lap",
+      "title": "Happy birthday,"
+    },
+    "age": {
+      "format": "{{years}} {{yearWord}} and {{months}} {{monthWord}} · {{days}} days",
+      "year": {
+        "one": "year",
+        "few": "years",
+        "many": "years"
+      },
+      "month": {
+        "one": "month",
+        "few": "months",
+        "many": "months"
+      }
+    },
+    "countdown": {
+      "ariaLabel": "Countdown to end of life",
+      "label": "Time left until",
+      "days": "days",
+      "hours": "hours",
+      "minutes": "minutes",
+      "seconds": "seconds"
+    },
+    "progress": {
+      "ariaLabel": "Percentage of life lived",
+      "stats": "Lived {{percent}}% · expected lifespan {{expectancy}} (WHO, 2024)"
+    },
+    "message": {
+      "early": "Most of the journey is still ahead. The perfect time to start thinking about what matters.",
+      "quarter": "A quarter of your allotted time is officially behind you. A great excuse to drink something nice.",
+      "half": "More than half of your allotted time is officially gone. The final act is not far off.",
+      "late": "The final act. Spending time well is the only way to beat it."
+    }
+  },
+  "notFound": {
+    "title": "Page is dead",
+    "message1": "It existed once, but time took its toll.",
+    "message2": "Or maybe it never existed at all — who knows.",
+    "back": "← Back to start"
+  }
 }

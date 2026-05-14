@@ -1,7 +1,7 @@
 <div class="card-page">
   @if (error()) {
     <p class="card-page__error" role="alert">{{ error() }}</p>
-  } 
+  }
   @else if (card(); as c) {
     @if (birthDate(); as birth) {
       @if (deathDate(); as death) {
@@ -12,8 +12,8 @@
         />
       }
     }
-  } 
+  }
   @else {
-    <p class="card-page__loading" aria-live="polite" aria-busy="true">Загружаем открытку…</p>
+    <p class="card-page__loading" aria-live="polite" aria-busy="true">{{ 'card.loading' | translate }}</p>
   }
 </div>

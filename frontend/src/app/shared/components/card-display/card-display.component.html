@@ -1,11 +1,11 @@
-<article class="card" lang="ru">
+<article class="card" [attr.lang]="currentLang()">
   <span class="card__corner card__corner--tr" aria-hidden="true"></span>
   <span class="card__corner card__corner--bl" aria-hidden="true"></span>
 
   <header class="card__header">
-    <p class="card__eyebrow">{{ birthDateFormatted() }} — ещё один оборот</p>
+    <p class="card__eyebrow">{{ birthDateFormatted() }} {{ 'card.header.eyebrow' | translate }}</p>
     <h1 class="card__title">
-      С днём рождения,<br>
+      {{ 'card.header.title' | translate }}<br>
       <span class="card__title-name">{{ recipientName() }}</span>
     </h1>
     @if (ageDisplay()) {
@@ -19,27 +19,27 @@
 
   <p class="card__message">{{ message() }}</p>
 
-  <p class="card__countdown-label">Осталось до {{ deathDateLabel() }}</p>
+  <p class="card__countdown-label">{{ 'card.countdown.label' | translate }} {{ deathDateLabel() }}</p>
 
-  <div class="card__countdown" role="timer" aria-label="Обратный отсчёт до конца жизни">
+  <div class="card__countdown" role="timer" [attr.aria-label]="'card.countdown.ariaLabel' | translate">
     <div class="card__unit">
       <span class="card__num">{{ daysDisplay() }}</span>
-      <span class="card__unit-label">дней</span>
+      <span class="card__unit-label">{{ 'card.countdown.days' | translate }}</span>
     </div>
     <span class="card__sep" aria-hidden="true">:</span>
     <div class="card__unit">
       <span class="card__num">{{ hoursDisplay() }}</span>
-      <span class="card__unit-label">часов</span>
+      <span class="card__unit-label">{{ 'card.countdown.hours' | translate }}</span>
     </div>
     <span class="card__sep" aria-hidden="true">:</span>
     <div class="card__unit">
       <span class="card__num">{{ minsDisplay() }}</span>
-      <span class="card__unit-label">минут</span>
+      <span class="card__unit-label">{{ 'card.countdown.minutes' | translate }}</span>
     </div>
     <span class="card__sep" aria-hidden="true">:</span>
     <div class="card__unit">
       <span class="card__num" [class.card__num--flash]="flash()">{{ secsDisplay() }}</span>
-      <span class="card__unit-label">секунд</span>
+      <span class="card__unit-label">{{ 'card.countdown.seconds' | translate }}</span>
     </div>
   </div>
 
@@ -49,12 +49,12 @@
     [attr.aria-valuenow]="progress()"
     aria-valuemin="0"
     aria-valuemax="100"
-    aria-label="Прожито процентов жизни"
+    [attr.aria-label]="'card.progress.ariaLabel' | translate"
   >
     <div class="card__progress-bar" [style.width.%]="progress()"></div>
   </div>
   <p class="card__stats">
-    Прожито {{ progressDisplay() }}% · ожидаемая продолжительность {{ lifeExpectancy() }} (ВОЗ, 2024)
+    {{ 'card.progress.stats' | translate: { percent: progressDisplay(), expectancy: lifeExpectancy() } }}
   </p>
 
   @if (quote()) {

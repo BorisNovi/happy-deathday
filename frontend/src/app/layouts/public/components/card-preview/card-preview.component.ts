@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { CardApi, CardStateService } from '@core';
 import { CardDisplayComponent } from '@shared';
 import { TuiButton } from '@taiga-ui/core';
@@ -15,7 +16,7 @@ import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-card-preview',
-  imports: [CardDisplayComponent, TuiButton],
+  imports: [CardDisplayComponent, TuiButton, TranslatePipe],
   templateUrl: './card-preview.component.html',
   styleUrl: './card-preview.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
