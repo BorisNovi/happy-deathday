@@ -15,6 +15,7 @@
       "p1": "A greeting that doesn't lie. Instead of \"another year behind\" — \"here's how much is left\".",
       "p2": "We'll calculate your estimated death date using WHO data and create a personalised card with a timer. Send it to someone who values honesty."
     },
+    "start": "Create a card",
     "form": {
       "ariaLabel": "Card creation form",
       "lang": "Card language",
@@ -25,7 +26,23 @@
       "birthDate": {
         "label": "Date of birth"
       },
-      "submit": "Preview →"
+      "gender": {
+        "label": "Recipient's sex",
+        "male": "Male",
+        "female": "Female"
+      },
+      "submit": "Preview →",
+      "next": "Choose style →"
+    },
+    "style": {
+      "title": "Choose a style",
+      "preview": "Preview →",
+      "options": {
+        "standard": "Standard",
+        "official": "Official",
+        "vintage": "Vintage",
+        "elegant": "Elegant"
+      }
     }
   },
   "validation": {

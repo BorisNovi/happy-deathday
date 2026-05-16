@@ -1,9 +1,12 @@
 import { Injectable, signal } from '@angular/core';
+import type { CardStyle } from '../../shared/interfaces/card-style.enum';
 
 export interface ICardFormState {
   recipientName: string;
   birthDate: Date;
   lang: string;
+  gender: 'male' | 'female';
+  style: CardStyle;
 }
 
 @Injectable({ providedIn: 'root' })

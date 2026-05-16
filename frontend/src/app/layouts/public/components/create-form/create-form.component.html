@@ -1,0 +1,66 @@
+<div class="create-form">
+  <p class="create-form__eyebrow" aria-hidden="true">☽ Happy Deathday</p>
+  <h1 class="create-form__title">{{ 'createCard.title' | translate }}</h1>
+
+  <hr class="create-form__divider" aria-hidden="true" />
+
+  <form
+    class="create-form__form"
+    [formGroup]="form"
+    (ngSubmit)="next()"
+    [attr.aria-label]="'createCard.form.ariaLabel' | translate"
+  >
+    <div class="create-form__field">
+      <tui-textfield>
+        <label tuiLabel for="recipientName">{{ 'createCard.form.name.label' | translate }}</label>
+        <input
+          id="recipientName"
+          tuiInput
+          type="text"
+          formControlName="recipientName"
+          [placeholder]="'createCard.form.name.placeholder' | translate"
+          autocomplete="off"
+        />
+      </tui-textfield>
+      <tui-error formControlName="recipientName" />
+    </div>
+
+    <div class="create-form__field">
+      <tui-textfield>
+        <label tuiLabel for="birthDate">{{ 'createCard.form.birthDate.label' | translate }}</label>
+        <input
+          id="birthDate"
+          tuiInputDate
+          formControlName="birthDate"
+          [max]="maxDate"
+        />
+        <tui-calendar *tuiDropdown />
+      </tui-textfield>
+      <tui-error formControlName="birthDate" />
+    </div>
+
+    <div class="create-form__field">
+      <p class="create-form__label">{{ 'createCard.form.gender.label' | translate }}</p>
+      <form tuiGroup [collapsed]="true" [formGroup]="form">
+        <label tuiBlock>
+          <input formControlName="gender" tuiRadio type="radio" value="male" />
+          {{ 'createCard.form.gender.male' | translate }}
+        </label>
+        <label tuiBlock>
+          <input formControlName="gender" tuiRadio type="radio" value="female" />
+          {{ 'createCard.form.gender.female' | translate }}
+        </label>
+      </form>
+      <tui-error formControlName="gender" />
+    </div>
+
+    <div class="create-form__actions">
+      <button tuiButton type="button" appearance="outline" size="m" (click)="back()">
+        {{ 'common.back' | translate }}
+      </button>
+      <button tuiButton type="submit" size="m">
+        {{ 'createCard.form.next' | translate }}
+      </button>
+    </div>
+  </form>
+</div>

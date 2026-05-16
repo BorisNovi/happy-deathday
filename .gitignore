@@ -41,6 +41,7 @@ yarn.lock
 *.launch
 .settings/
 *.sublime-workspace
+*.lscache
 
 # Environment & secrets
 .env

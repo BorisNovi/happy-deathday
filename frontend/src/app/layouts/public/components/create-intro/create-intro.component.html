@@ -1,0 +1,15 @@
+<div class="create-intro">
+  <p class="create-intro__eyebrow" aria-hidden="true">☽ Happy Deathday</p>
+  <h1 class="create-intro__title">{{ 'createCard.title' | translate }}</h1>
+
+  <div class="create-intro__body" role="note">
+    <p>{{ 'createCard.intro.p1' | translate }}</p>
+    <p>{{ 'createCard.intro.p2' | translate }}</p>
+  </div>
+
+  <hr class="create-intro__divider" aria-hidden="true" />
+
+  <button tuiButton type="button" size="l" [style.width.%]="100" (click)="start()">
+    {{ 'createCard.start' | translate }}
+  </button>
+</div>

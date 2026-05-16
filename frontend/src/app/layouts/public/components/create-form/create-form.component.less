@@ -7,7 +7,7 @@
   background: var(--cream);
 }
 
-.create-card {
+.create-form {
   width: 100%;
   max-width: 420px;
 
@@ -30,19 +30,6 @@
     line-height: 1.2;
   }
 
-  &__intro {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    p {
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin: 0;
-    }
-  }
-
   &__divider {
     border: none;
     border-top: 1px solid var(--pale);
@@ -61,6 +48,22 @@
 
     tui-error {
       min-height: 1.5rem;
+    }
+  }
+
+  &__label {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    margin: 0 0 0.375rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+
+    button:last-child {
+      flex: 1;
     }
   }
 }

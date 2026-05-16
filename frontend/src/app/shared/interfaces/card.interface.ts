@@ -1,3 +1,4 @@
+import { CardStyle } from './card-style.enum';
 import { IEntity } from './entity.interface';
 
 export interface ICard extends IEntity {
@@ -11,4 +12,6 @@ export interface ICardCreate {
   recipientName: string;
   birthDate: string | Date;
   lang: string;
+  gender: 'male' | 'female';
+  style: CardStyle;
 }

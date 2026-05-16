@@ -1,0 +1,51 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 2rem 1rem;
+  background: var(--cream);
+}
+
+.create-intro {
+  width: 100%;
+  max-width: 420px;
+
+  &__eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.75rem;
+  }
+
+  &__title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 400;
+    color: var(--ink);
+    margin: 0 0 1.25rem;
+    line-height: 1.2;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+  }
+
+  &__divider {
+    border: none;
+    border-top: 1px solid var(--pale);
+    margin: 1.75rem 0;
+  }
+}

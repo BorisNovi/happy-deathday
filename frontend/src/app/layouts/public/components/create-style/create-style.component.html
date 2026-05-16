@@ -1,0 +1,34 @@
+<div class="create-style">
+  <p class="create-style__eyebrow" aria-hidden="true">☽ Happy Deathday</p>
+  <h1 class="create-style__title">{{ 'createCard.style.title' | translate }}</h1>
+
+  <hr class="create-style__divider" aria-hidden="true" />
+
+  <div
+    class="create-style__grid"
+    role="radiogroup"
+    [attr.aria-label]="'createCard.style.title' | translate"
+  >
+    @for (style of styles; track style) {
+      <button
+        class="create-style__card"
+        type="button"
+        [class.create-style__card--selected]="selectedStyle() === style"
+        [attr.aria-pressed]="selectedStyle() === style"
+        (click)="selectStyle(style)"
+      >
+        <span class="create-style__card-preview create-style__card-preview--{{ style }}"></span>
+        <span class="create-style__card-label">{{ 'createCard.style.options.' + style | translate }}</span>
+      </button>
+    }
+  </div>
+
+  <div class="create-style__actions">
+    <button tuiButton type="button" appearance="outline" size="m" (click)="back()">
+      {{ 'common.back' | translate }}
+    </button>
+    <button tuiButton type="button" size="m" (click)="preview()">
+      {{ 'createCard.style.preview' | translate }}
+    </button>
+  </div>
+</div>
