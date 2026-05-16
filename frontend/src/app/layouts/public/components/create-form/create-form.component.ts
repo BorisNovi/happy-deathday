@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CardStateService, LanguageService, QueryParamsService } from '@core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { TuiDay } from '@taiga-ui/cdk';
 import { TuiButton, TuiError, TuiGroup, TuiInput, TuiRadio } from '@taiga-ui/core';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/core/tokens';
 import { TuiBlock, TuiInputDate } from '@taiga-ui/kit';
 import { debounceTime } from 'rxjs';
-import { CardStateService, LanguageService, QueryParamsService } from '@core';
 
 @Component({
   selector: 'app-create-form',
@@ -54,9 +54,12 @@ export class CreateFormComponent {
     const birthDate = saved?.birthDate ?? (parsed['birthDate'] instanceof Date ? parsed['birthDate'] : null);
     const gender = saved?.gender ?? (parsed['gender'] as 'male' | 'female' | null);
 
-    if (name) this.form.patchValue({ recipientName: name });
-    if (birthDate) this.form.patchValue({ birthDate: TuiDay.fromLocalNativeDate(birthDate) });
-    if (gender) this.form.patchValue({ gender });
+    if (name)
+      this.form.patchValue({ recipientName: name });
+    if (birthDate)
+      this.form.patchValue({ birthDate: TuiDay.fromLocalNativeDate(birthDate) });
+    if (gender)
+      this.form.patchValue({ gender });
 
     this.form.valueChanges
       .pipe(debounceTime(400), takeUntilDestroyed())
