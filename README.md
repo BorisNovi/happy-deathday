@@ -6,17 +6,21 @@ A shareable birthday card that counts down to the recipient's estimated death da
 
 ## How it works
 
-1. Fill in the recipient's name, date of birth, and preferred language.
-2. A personalised card is generated with a live countdown timer — days, hours, minutes, seconds — until the estimated death date.
-3. The death date is calculated on the server using WHO life expectancy statistics.
-4. Share the card link. Cards automatically expire and are cleaned up after their TTL.
+1. Enter the recipient's name, date of birth, and gender.
+2. Pick one of four visual card styles.
+3. Preview the card — it shows a live countdown timer (days, hours, minutes, seconds) to the estimated death date.
+4. Submit to generate a permanent shareable link.
+5. The death date is calculated on the server using WHO life expectancy statistics.
+6. Cards automatically expire and are cleaned up after their TTL.
 
 ---
 
 ## Features
 
+- **3-step creation wizard** — intro → form → style, state persisted in URL query params so a page refresh never loses progress
+- **4 card styles** — Standard, Official, Vintage, Elegant
 - **Life countdown** — real-time timer ticking down to the estimated death date
-- **WHO-based estimation** — death date derived from WHO 2024 life expectancy data
+- **WHO-based estimation** — life expectancy differs by gender (71 years male / 76 years female, WHO 2024)
 - **Dark / light theme** — persisted in `localStorage`
 - **Multilingual** — Russian and English, persisted in `localStorage`
 - **SSR** — server-side rendering for fast initial load and proper meta tags
@@ -26,12 +30,12 @@ A shareable birthday card that counts down to the recipient's estimated death da
 
 ## Tech stack
 
-| Layer     | Technology                                      |
-|-----------|-------------------------------------------------|
-| Frontend  | Angular 21 · Taiga UI v5 · ngx-translate v17   |
-| Rendering | Angular SSR (server-side rendering)             |
-| Backend   | ASP.NET Core · .NET 10 · Entity Framework Core  |
-| Database  | PostgreSQL 17                                   |
+| Layer     | Technology                                     |
+|-----------|------------------------------------------------|
+| Frontend  | Angular 21 · Taiga UI v5 · ngx-translate v17  |
+| Rendering | Angular SSR (server-side rendering)            |
+| Backend   | ASP.NET Core · .NET 10 · Entity Framework Core |
+| Database  | PostgreSQL 17                                  |
 
 ---
 
@@ -107,9 +111,15 @@ CORS in development allows `http://localhost:4200`. To change, update `appsettin
 happy-deathday/
 ├── frontend/                   # Angular 21 SSR app
 │   └── src/app/
-│       ├── core/               # singleton services (CardApi, LanguageService, StorageService …)
+│       ├── core/               # singleton services (CardApi, CardStateService, LanguageService …)
 │       ├── features/           # routed pages (card display, 404)
-│       ├── layouts/            # shell layouts + page components (create, preview)
+│       ├── layouts/
+│       │   └── public/
+│       │       └── components/
+│       │           ├── create-intro/   # step 1 — landing / description
+│       │           ├── create-form/    # step 2 — name, birth date, gender
+│       │           ├── create-style/   # step 3 — style picker
+│       │           └── card-preview/   # review & submit
 │       └── shared/             # reusable components and interfaces
 ├── backend/                    # ASP.NET Core Web API
 │   ├── Controllers/            # HTTP endpoints
@@ -122,11 +132,23 @@ happy-deathday/
 
 ---
 
+## Routing
+
+| Path                    | Component     | Description               |
+|-------------------------|---------------|---------------------------|
+| `/public/create/intro`  | CreateIntro   | Landing page with CTA     |
+| `/public/create/form`   | CreateForm    | Name, birth date, gender  |
+| `/public/create/style`  | CreateStyle   | Style picker              |
+| `/public/card-preview`  | CardPreview   | Review and submit         |
+| `/card/:id`             | Card          | Shareable card with timer |
+
+---
+
 ## API
 
-| Method | Path           | Description                              |
-|--------|----------------|------------------------------------------|
-| `POST` | `/api/card`    | Create a card, returns the card with ID  |
-| `GET`  | `/api/card/:id`| Fetch a card by ID                       |
+| Method | Path            | Description                             |
+|--------|-----------------|-----------------------------------------|
+| `POST` | `/api/card`     | Create a card, returns the card with ID |
+| `GET`  | `/api/card/:id` | Fetch a card by ID                      |
 
 Cards include an `expiresAt` timestamp. Expired cards are deleted automatically.
