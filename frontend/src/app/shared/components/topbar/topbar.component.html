@@ -1,30 +1,34 @@
-<button
-  tuiButton
-  type="button"
-  appearance="flat"
-  size="m"
-  [tuiDropdown]="langDropdown"
-  [(tuiDropdownOpen)]="dropdownOpen"
-  [attr.aria-label]="'topbar.lang' | translate"
->
-  <tui-icon icon="@tui.languages" />
-  {{ currentLang().label }}
-</button>
+<div class="logo">Happy DeathDay</div>
 
-<ng-template #langDropdown>
-  <tui-data-list>
-    @for (opt of langOptions; track opt.value) {
-      <button tuiOption type="button" (click)="changeLang(opt)">{{ opt.label }}</button>
-    }
-  </tui-data-list>
-</ng-template>
-
-<button
-  tuiIconButton
-  type="button"
-  appearance="flat"
-  size="m"
-  [iconStart]="darkMode() ? '@tui.sun' : '@tui.moon'"
-  [attr.aria-label]="(darkMode() ? 'topbar.theme.light' : 'topbar.theme.dark') | translate"
-  (click)="toggleTheme()"
-></button>
+<nav>
+  <button
+    tuiButton
+    type="button"
+    appearance="flat"
+    size="m"
+    [tuiDropdown]="langDropdown"
+    [(tuiDropdownOpen)]="dropdownOpen"
+    [attr.aria-label]="'topbar.lang' | translate"
+  >
+    <tui-icon icon="@tui.languages" />
+    {{ currentLang().label }}
+  </button>
+  
+  <ng-template #langDropdown>
+    <tui-data-list>
+      @for (opt of langOptions; track opt.value) {
+        <button tuiOption type="button" (click)="changeLang(opt)">{{ opt.label }}</button>
+      }
+    </tui-data-list>
+  </ng-template>
+  
+  <button
+    tuiIconButton
+    type="button"
+    appearance="flat"
+    size="m"
+    [iconStart]="darkMode() ? '@tui.sun' : '@tui.moon'"
+    [attr.aria-label]="(darkMode() ? 'topbar.theme.light' : 'topbar.theme.dark') | translate"
+    (click)="toggleTheme()"
+  ></button>
+</nav>

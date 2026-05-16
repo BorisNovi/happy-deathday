@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import type { CardStyle } from '../../shared/interfaces/card-style.enum';
+import { CardStyle } from '@shared';
 
 export interface ICardFormState {
   recipientName: string;
