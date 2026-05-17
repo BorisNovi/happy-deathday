@@ -11,10 +11,10 @@ export class CardApi {
   readonly #http = inject(HttpClient);
 
   getById(id: string): Observable<ICard> {
-    return this.#http.get<ICard>(`${environment.apiUrl}/card/${id}`);
+    return this.#http.get<ICard>(`${environment.apiUrl}/cards/${id}`);
   }
 
   create(body: ICardCreate): Observable<ICard> {
-    return this.#http.post<ICard>(`${environment.apiUrl}/card`, body);
+    return this.#http.post<ICard>(`${environment.apiUrl}/cards`, body);
   }
 }

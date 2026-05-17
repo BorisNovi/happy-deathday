@@ -18,7 +18,10 @@ public class CardsController(AppDbContext db) : ControllerBase
         {
             Id = Guid.NewGuid(),
             RecipientName = request.RecipientName,
-            BirthDate = request.BirthDate,
+            BirthDate = request.BirthDate!.Value,
+            Lang = request.Lang,
+            Gender = request.Gender!.Value,
+            Style = request.Style!.Value,
             CreatedAt = now,
             ExpiresAt = now.AddDays(7)
         };

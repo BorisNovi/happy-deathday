@@ -13,6 +13,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         {
             e.HasKey(c => c.Id);
             e.Property(c => c.RecipientName).HasMaxLength(100).IsRequired();
+            e.Property(c => c.Lang).HasMaxLength(2).IsRequired();
+            e.Property(c => c.Gender).HasConversion<string>().IsRequired();
+            e.Property(c => c.Style).HasConversion<string>().IsRequired();
             e.Property(c => c.CreatedAt).IsRequired();
             e.Property(c => c.ExpiresAt).IsRequired();
             e.HasIndex(c => c.ExpiresAt);
