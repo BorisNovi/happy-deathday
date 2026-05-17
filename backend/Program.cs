@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using HappyDeathdayApi.Data;
+using HappyDeathdayApi.Extensions;
 using HappyDeathdayApi.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,7 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
     });
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
@@ -19,24 +21,14 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddHostedService<CardCleanupService>();
 builder.Services.AddProblemDetails();
 
-var allowedOrigins = builder.Configuration
-    .GetSection("Cors:AllowedOrigins")
-    .Get<string[]>() ?? [];
-
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.WithOrigins(allowedOrigins)
-              .WithMethods("GET", "POST")
-              .AllowAnyHeader();
-    });
-});
+builder.Services.AddCorsPolicy(builder.Configuration);
+builder.Services.AddRateLimiting();
 
 var app = builder.Build();
 
 app.UseExceptionHandler();
 app.UseCors();
+app.UseRateLimiter();
 
 app.MapControllers();
 

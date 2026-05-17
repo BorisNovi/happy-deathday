@@ -2,6 +2,7 @@ using HappyDeathdayApi.Data;
 using HappyDeathdayApi.Dtos;
 using HappyDeathdayApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 
 namespace HappyDeathdayApi.Controllers;
@@ -11,6 +12,7 @@ namespace HappyDeathdayApi.Controllers;
 public class CardsController(AppDbContext db) : ControllerBase
 {
     [HttpPost]
+    [EnableRateLimiting("create")]
     public async Task<IActionResult> Create(CreateCardRequest request)
     {
         var now = DateTime.UtcNow;
@@ -33,6 +35,7 @@ public class CardsController(AppDbContext db) : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
+    [EnableRateLimiting("read")]
     public async Task<IActionResult> GetById(Guid id)
     {
         var card = await db.Cards.FindAsync(id);
