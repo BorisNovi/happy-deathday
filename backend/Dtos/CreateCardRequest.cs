@@ -8,6 +8,7 @@ public record CreateCardRequest(
     [Required, MaxLength(100)] string RecipientName,
     [Required, PastDate] DateOnly? BirthDate,
     [Required, MaxLength(2)] string Lang,
+    CountryCode? CountryCode,
     [Required] CardGender? Gender,
     [Required] CardStyle? Style
 );
