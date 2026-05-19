@@ -7,21 +7,34 @@ body {
 }
 
 :root {
-  --cream: #f5efe6;
+  --bg: #f2f2f2;
+  --red: #D84040;
+  --red-hover: #e06060;
+  --red-pressed: #932b2b;
+  // --cream: #f5efe6;
   --warm-white: #faf7f2;
   --ink: #1a1510;
   --brown: #5c3d2e;
   --muted: #7d5c4e;
   --accent: #c4562a;
   --pale: #e8ddd0;
+  --images-filter: invert(0%);
+
+  // overrides
+  --tui-background-accent-1: var(--red);
+  --tui-background-accent-1-hover: var(--red-hover);
+  --tui-background-accent-1-pressed: var(--red-pressed);
 }
 
 body[tuiTheme='dark'] {
-  --cream: #1a1510;
+  --bg: #323232;
+  --primary: #D84040;
+  // --cream: #1a1510;
   --warm-white: #221c16;
   --ink: #f5efe6;
   --brown: #c4956a;
   --muted: #a08070;
   --accent: #e07050;
   --pale: #2e2520;
+  --images-filter: invert(75%);
 }

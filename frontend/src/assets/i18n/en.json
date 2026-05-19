@@ -10,8 +10,12 @@
     }
   },
   "createCard": {
-    "title": "A countdown card",
+    "title": "Cards with countdown",
     "intro": {
+      "title": {
+        "line1": "Cards",
+        "line2": "with countdown"
+      },
       "p1": "A greeting that doesn't lie. Instead of \"another year behind\" — \"here's how much is left\".",
       "p2": "We'll calculate your estimated death date using WHO data and create a personalised card with a timer. Send it to someone who values honesty."
     },

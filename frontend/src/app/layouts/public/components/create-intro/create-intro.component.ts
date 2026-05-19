@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { TuiButton } from '@taiga-ui/core';
+import { TuiButton, TuiIcon } from '@taiga-ui/core';
 import { CardStateService } from '@core';
 
 @Component({
   selector: 'app-create-intro',
-  imports: [TuiButton, TranslatePipe],
+  imports: [TuiButton, TuiIcon, TranslatePipe],
   templateUrl: './create-intro.component.html',
   styleUrl: './create-intro.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
