@@ -2,6 +2,30 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+// TODO: перевернуть руки скелета
+.hands {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -16vh;
+  pointer-events: none;
+  filter: var(--images-filter);
+
+  &__left {
+    position: absolute;
+    left: 0;
+    transform: translateX(calc(-100% + 35vw));
+  }
+
+  &__right {
+    position: absolute;
+    right: 0;
+    transform: translateX(calc(100% - 35vw));
+  }
 }
 
 .card-preview {

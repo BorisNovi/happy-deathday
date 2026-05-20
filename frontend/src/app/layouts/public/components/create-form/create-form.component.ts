@@ -1,18 +1,20 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardStateService, LanguageService, QueryParamsService } from '@core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Country } from '@shared';
 import { TuiDay } from '@taiga-ui/cdk';
-import { TuiButton, TuiError, TuiGroup, TuiInput, TuiRadio } from '@taiga-ui/core';
+import { TuiButton, TuiDataList, TuiError, TuiGroup, TuiIcon, TuiInput, TuiRadio } from '@taiga-ui/core';
+import { TUI_ITEMS_HANDLERS } from '@taiga-ui/core/directives/items-handlers';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/core/tokens';
-import { TuiBlock, TuiInputDate } from '@taiga-ui/kit';
+import { TuiBlock, TuiComboBox, TuiInputDate } from '@taiga-ui/kit';
 import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-create-form',
-  imports: [ReactiveFormsModule, TuiInput, TuiInputDate, TuiButton, TuiError, TuiGroup, TuiBlock, TuiRadio, TranslatePipe],
+  imports: [ReactiveFormsModule, TuiInput, TuiInputDate, TuiButton, TuiError, TuiGroup, TuiBlock, TuiRadio, TuiIcon, TuiComboBox, TuiDataList, TranslatePipe],
   templateUrl: './create-form.component.html',
   styleUrl: './create-form.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,6 +31,15 @@ import { debounceTime } from 'rxjs';
       }),
       deps: [TranslateService, LanguageService],
     },
+    {
+      provide: TUI_ITEMS_HANDLERS,
+      useFactory: (translate: TranslateService) => ({
+        stringify: signal((countryCode: Country) => translate.instant(`country.${countryCode}`)),
+        identityMatcher: signal((a: unknown, b: unknown) => a === b),
+        disabledItemHandler: signal(() => false),
+      }),
+      deps: [TranslateService],
+    },
   ],
 })
 export class CreateFormComponent {
@@ -39,10 +50,12 @@ export class CreateFormComponent {
   readonly #state = inject(CardStateService);
 
   protected readonly maxDate = TuiDay.currentLocal();
+  protected readonly countries = Object.values(Country);
 
   protected readonly form = this.#fb.group({
     recipientName: this.#fb.nonNullable.control('', [Validators.required, Validators.maxLength(30)]),
     birthDate: this.#fb.control<TuiDay | null>(null, Validators.required),
+    countryCode: this.#fb.control<Country | null>(null),
     gender: this.#fb.control<'male' | 'female' | null>(null, Validators.required),
   });
 
@@ -52,12 +65,15 @@ export class CreateFormComponent {
 
     const name = saved?.recipientName ?? parsed['name'];
     const birthDate = saved?.birthDate ?? (parsed['birthDate'] instanceof Date ? parsed['birthDate'] : null);
+    const countryCode = saved?.countryCode ?? parsed['countryCode'];
     const gender = saved?.gender ?? (parsed['gender'] as 'male' | 'female' | null);
 
     if (name)
       this.form.patchValue({ recipientName: name });
     if (birthDate)
       this.form.patchValue({ birthDate: TuiDay.fromLocalNativeDate(birthDate) });
+    if (countryCode)
+      this.form.patchValue({ countryCode });
     if (gender)
       this.form.patchValue({ gender });
 
@@ -67,10 +83,11 @@ export class CreateFormComponent {
   }
 
   #syncToParams(replace: boolean): void {
-    const { recipientName, birthDate, gender } = this.form.getRawValue();
+    const { recipientName, birthDate, countryCode, gender } = this.form.getRawValue();
     this.#queryParams.updateQueryParams({
       name: recipientName || null,
       birthDate: birthDate?.toLocalNativeDate() ?? null,
+      countryCode: countryCode || null,
       gender: gender || null,
     }, undefined, replace);
   }

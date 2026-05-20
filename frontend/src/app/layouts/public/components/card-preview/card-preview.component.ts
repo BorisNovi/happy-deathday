@@ -10,7 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CardApi, CardStateService, LanguageService, QueryParamsService } from '@core';
-import { CardDisplayComponent, CardStyle } from '@shared';
+import { CardDisplayComponent, CardStyle, Country } from '@shared';
 import { TuiButton } from '@taiga-ui/core';
 import { finalize } from 'rxjs';
 
@@ -52,6 +52,7 @@ export class CardPreviewComponent {
     const parsed = this.#queryParams.parseQueryParams(this.#route.snapshot.queryParams);
     const name = parsed['name'] as string | undefined;
     const birthDate = parsed['birthDate'] instanceof Date ? parsed['birthDate'] : null;
+    const countryCode = parsed['countryCode'] as Country;
     const gender = parsed['gender'] as 'male' | 'female' | undefined;
     const style = parsed['style'] as CardStyle | undefined;
 
@@ -60,6 +61,7 @@ export class CardPreviewComponent {
         recipientName: name,
         birthDate,
         lang: this.#langService.currentLanguageOption().value,
+        countryCode,
         gender,
         style,
       });
@@ -82,6 +84,7 @@ export class CardPreviewComponent {
         recipientName: data.recipientName,
         birthDate: data.birthDate,
         lang: data.lang,
+        countryCode: data.countryCode,
         gender: data.gender,
         style: data.style,
       })

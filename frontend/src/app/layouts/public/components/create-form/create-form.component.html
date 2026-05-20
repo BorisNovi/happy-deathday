@@ -1,7 +1,5 @@
 <div class="create-form">
-  <h1 class="create-form__title">{{ 'createCard.title' | translate }}</h1>
-
-  <hr class="create-form__divider" aria-hidden="true" />
+  <h1 class="create-form__title">{{ 'createCard.step-1' | translate }}</h1>
 
   <form
     class="create-form__form"
@@ -38,15 +36,34 @@
       <tui-error formControlName="birthDate" />
     </div>
 
+    TODO: сделалть значение по умолчанию ww
     <div class="create-form__field">
-      <p class="create-form__label">{{ 'createCard.form.gender.label' | translate }}</p>
+      <tui-textfield>
+        <label tuiLabel for="countryCode">{{ 'createCard.form.country.label' | translate }}</label>
+        <input
+          id="countryCode"
+          tuiComboBox
+          formControlName="countryCode"
+          [strict]="true"
+          [placeholder]="'createCard.form.country.placeholder' | translate"
+        />
+        <tui-data-list *tuiDropdown>
+          @for (c of countries; track c) {
+            <button tuiOption [value]="c">{{ 'country.' + c | translate }}</button>
+          }
+        </tui-data-list>
+      </tui-textfield>
+      <tui-error formControlName="countryCode" />
+    </div>
+
+    <div class="create-form__field gender">
       <form tuiGroup [collapsed]="true" [formGroup]="form">
         <label tuiBlock>
-          <input formControlName="gender" tuiRadio type="radio" value="male" />
+          <input formControlName="gender" tuiBlock type="radio" value="male" />
           {{ 'createCard.form.gender.male' | translate }}
         </label>
         <label tuiBlock>
-          <input formControlName="gender" tuiRadio type="radio" value="female" />
+          <input formControlName="gender" tuiBlock type="radio" value="female" />
           {{ 'createCard.form.gender.female' | translate }}
         </label>
       </form>
@@ -55,10 +72,12 @@
 
     <div class="create-form__actions">
       <button tuiButton type="button" appearance="outline" size="m" (click)="back()">
+        <tui-icon icon="@tui.chevron-left" />
         {{ 'common.back' | translate }}
       </button>
       <button tuiButton type="submit" size="m">
         {{ 'createCard.form.next' | translate }}
+        <tui-icon icon="@tui.chevron-right" />
       </button>
     </div>
   </form>

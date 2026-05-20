@@ -1,6 +1,6 @@
 {
   "common": {
-    "back": "← Back"
+    "back": "Back"
   },
   "topbar": {
     "lang": "Select language",
@@ -18,6 +18,8 @@
       },
       "p": "A greeting that doesn't lie. Instead of \"another year behind\" — \"here's how much is left\". We'll calculate your estimated death date using WHO data and create a personalised card with a timer. Send it to someone who values honesty."
     },
+    "step-1": "1. Enter the recipient's information",
+    "step-2": "2. Choose a card style",
     "start": "Create a card",
     "form": {
       "ariaLabel": "Card creation form",
@@ -29,17 +31,19 @@
       "birthDate": {
         "label": "Date of birth"
       },
+      "country": {
+        "label": "Country of residence",
+        "placeholder": "Select a country"
+      },
       "gender": {
-        "label": "Recipient's sex",
         "male": "Male",
         "female": "Female"
       },
-      "submit": "Preview →",
-      "next": "Choose style →"
+      "submit": "Preview",
+      "next": "Choose style"
     },
     "style": {
-      "title": "Choose a style",
-      "preview": "Preview →",
+      "preview": "Preview",
       "options": {
         "standard": "Standard",
         "official": "Official",
@@ -54,7 +58,7 @@
   },
   "preview": {
     "saving": "Saving…",
-    "share": "Share →",
+    "share": "Share",
     "note": "The death date in the preview is approximate. The exact date is calculated on the server using WHO data."
   },
   "card": {
@@ -96,10 +100,32 @@
       "late": "The final act. Spending time well is the only way to beat it."
     }
   },
+  "country": {
+    "ww": "World average",
+    "ru": "Russia",
+    "ua": "Ukraine",
+    "by": "Belarus",
+    "kz": "Kazakhstan",
+    "uz": "Uzbekistan",
+    "ge": "Georgia",
+    "am": "Armenia",
+    "il": "Israel",
+    "us": "United States",
+    "gb": "United Kingdom",
+    "ca": "Canada",
+    "au": "Australia",
+    "de": "Germany",
+    "fr": "France",
+    "pl": "Poland",
+    "es": "Spain",
+    "it": "Italy",
+    "nl": "Netherlands",
+    "rs": "Serbia"
+  },
   "notFound": {
     "title": "Page is dead",
     "message1": "It existed once, but time took its toll.",
     "message2": "Or maybe it never existed at all — who knows.",
-    "back": "← Back to start"
+    "back": "Back to start"
   }
 }

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardStateService, LanguageService, QueryParamsService } from '@core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { CardStyle } from '@shared';
+import { CardStyle, Country } from '@shared';
 import { TuiButton } from '@taiga-ui/core';
 
 @Component({
@@ -38,6 +38,7 @@ export class CreateStyleComponent {
     const parsed = this.#queryParams.parseQueryParams(this.#route.snapshot.queryParams);
     const name = parsed['name'] as string | undefined;
     const birthDate = parsed['birthDate'] instanceof Date ? parsed['birthDate'] : null;
+    const countryCode = parsed['countryCode'] as Country;
     const gender = parsed['gender'] as 'male' | 'female' | undefined;
 
     if (!name || !birthDate || !gender) {
@@ -49,6 +50,7 @@ export class CreateStyleComponent {
       recipientName: name,
       birthDate,
       lang: this.#langService.currentLanguageOption().value,
+      countryCode,
       gender,
       style: this.selectedStyle(),
     });

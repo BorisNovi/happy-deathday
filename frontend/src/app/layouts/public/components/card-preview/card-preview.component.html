@@ -1,4 +1,8 @@
 @if (formData(); as data) {
+  <div class="hands" aria-hidden="true">
+    <img class="hands__left" src="assets/images/left-hand-l.svg" alt="">
+    <img class="hands__right" src="assets/images/right-hand-l.svg" alt="">
+  </div>
   <div class="card-preview">
     <app-card-display
       [recipientName]="data.recipientName"

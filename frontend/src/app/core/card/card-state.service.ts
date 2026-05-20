@@ -1,11 +1,12 @@
 import { Injectable, signal } from '@angular/core';
-import { CardStyle } from '@shared';
+import { CardStyle, Country } from '@shared';
 
 export interface ICardFormState {
   recipientName: string;
   birthDate: Date;
   lang: string;
   gender: 'male' | 'female';
+  countryCode: Country;
   style: CardStyle;
 }
 
