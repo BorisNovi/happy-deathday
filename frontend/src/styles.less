@@ -8,6 +8,7 @@ body {
 
 :root {
   --bg: #f2f2f2;
+  --text-action: #323232;
   --red: #D84040;
   --red-hover: #e06060;
   --red-pressed: #932b2b;
@@ -24,10 +25,19 @@ body {
   --tui-background-accent-1: var(--red);
   --tui-background-accent-1-hover: var(--red-hover);
   --tui-background-accent-1-pressed: var(--red-pressed);
+  --tui-text-action: var(--text-action);
+
+  // media
+  --lang-btn-display: inline;
+
+  @media (max-width: 480px) {
+    --lang-btn-display: none;
+  }
 }
 
 body[tuiTheme='dark'] {
   --bg: #323232;
+  --text-action: #f2f2f2;
   --primary: #D84040;
   // --cream: #1a1510;
   --warm-white: #221c16;
@@ -37,4 +47,8 @@ body[tuiTheme='dark'] {
   --accent: #e07050;
   --pale: #2e2520;
   --images-filter: invert(75%);
+
+  // overrides
+  --tui-text-action: var(--text-action);
 }
+

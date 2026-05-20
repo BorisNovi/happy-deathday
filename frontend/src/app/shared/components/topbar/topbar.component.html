@@ -1,8 +1,9 @@
 <div class="logo">Happy DeathDay</div>
 
-<nav>
+<nav class="nav">
   <button
     tuiButton
+    class="nav__lang-btn"
     type="button"
     appearance="flat"
     size="m"
@@ -11,7 +12,7 @@
     [attr.aria-label]="'topbar.lang' | translate"
   >
     <tui-icon icon="@tui.languages" />
-    {{ currentLang().label }}
+    <span class="nav__lang-btn__label">{{ currentLang().label }}</span>
   </button>
   
   <ng-template #langDropdown>

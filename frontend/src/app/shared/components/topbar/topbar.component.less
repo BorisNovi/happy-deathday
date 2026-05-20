@@ -11,7 +11,13 @@
   font-weight: 500;
 }
 
-nav {
+.nav {
   display: flex;
   gap: .5rem;
+
+  &__lang-btn {
+    &__label {
+      display: var(--lang-btn-display);
+    }
+  }
 }

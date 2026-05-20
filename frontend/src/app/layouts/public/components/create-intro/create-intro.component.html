@@ -1,16 +1,15 @@
 <div class="hands">
-  <img class="hands__left" src="assets/images/left-hand.svg" alt="skeleton-left-hand">
-  <img class="hands__right" src="assets/images/right-hand.svg" alt="skeleton-right-hand">
+  <img class="hands__left" src="assets/images/left-hand-l.svg" alt="skeleton-left-hand">
+  <img class="hands__right" src="assets/images/right-hand-l.svg" alt="skeleton-right-hand">
 </div>
 <div class="create-intro">
   <h1 class="create-intro__title">{{ 'createCard.intro.title.line1' | translate }}<br aria-hidden="true">{{ 'createCard.intro.title.line2' | translate }}</h1>
 
   <div class="create-intro__body" role="note">
-    <p>{{ 'createCard.intro.p1' | translate }}</p>
-    <p>{{ 'createCard.intro.p2' | translate }}</p>
+    <p>{{ 'createCard.intro.p' | translate }}</p>
   </div>
 
-  <button tuiButton type="button" size="l" (click)="start()">
+  <button tuiButton class="create-intro__start-btn" type="button" size="l" (click)="start()">
     {{ 'createCard.start' | translate }}
     <tui-icon icon="@tui.chevron-right" />
   </button>
