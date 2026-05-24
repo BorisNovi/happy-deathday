@@ -33,7 +33,8 @@
       },
       "country": {
         "label": "Country of residence",
-        "placeholder": "Select a country"
+        "placeholder": "Select a country",
+        "hint": "Life expectancy varies by country. \"Whole world\" uses the global average."
       },
       "gender": {
         "male": "Male",
@@ -58,8 +59,7 @@
   },
   "preview": {
     "saving": "Saving…",
-    "share": "Share",
-    "note": "The death date in the preview is approximate. The exact date is calculated on the server using WHO data."
+    "share": "Share"
   },
   "card": {
     "loading": "Loading card…",
@@ -101,7 +101,7 @@
     }
   },
   "country": {
-    "ww": "World average",
+    "ww": "Whole world",
     "ru": "Russia",
     "ua": "Ukraine",
     "by": "Belarus",

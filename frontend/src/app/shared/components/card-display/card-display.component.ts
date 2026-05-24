@@ -8,8 +8,9 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '@core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Country } from '@shared';
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'] as const;
 
@@ -24,6 +25,8 @@ export class CardDisplayComponent {
   readonly recipientName = input.required<string>();
   readonly birthDate = input.required<Date>();
   readonly deathDate = input.required<Date>();
+  readonly countryCode = input<Country | undefined>(undefined);
+  readonly gender = input<'male' | 'female' | undefined>(undefined);
   readonly quote = input<string | undefined>(undefined);
 
   readonly #destroy = inject(DestroyRef);
@@ -127,7 +130,14 @@ export class CardDisplayComponent {
     this.currentLang();
     const span = this.deathDate().getTime() - this.birthDate().getTime();
     const years = Math.round(span / (365.25 * 86_400_000));
-    return `${years} ${this.#pluralYears(years)}`;
+    const code = this.countryCode();
+    const g = this.gender();
+    const country = code ? this.#translate.instant(`country.${code}`) : '';
+    const genderLabel = g ? this.#translate.instant(`createCard.form.gender.${g}`) : '';
+    const suffix = [country, genderLabel].filter(Boolean).join(', ');
+    return suffix
+      ? `${years} ${this.#pluralYears(years)}, ${suffix}`
+      : `${years} ${this.#pluralYears(years)}`;
   });
 
   protected readonly message = computed<string>(() => {

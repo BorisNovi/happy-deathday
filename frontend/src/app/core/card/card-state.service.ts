@@ -4,6 +4,7 @@ import { CardStyle, Country } from '@shared';
 export interface ICardFormState {
   recipientName: string;
   birthDate: Date;
+  deathDate: Date;
   lang: string;
   gender: 'male' | 'female';
   countryCode: Country;

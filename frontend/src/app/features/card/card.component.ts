@@ -41,13 +41,6 @@ export class CardComponent {
 
   protected readonly deathDate = computed(() => {
     const c = this.card();
-    if (!c)
-      return null;
-    if (c.deathDate)
-      return new Date(c.deathDate);
-    const d = new Date(c.birthDate);
-    // TODO: дата захардкожена, добавить на бэке
-    d.setFullYear(d.getFullYear() + 73);
-    return d;
+    return c ? new Date(c.expectedDeathDate) : null;
   });
 }

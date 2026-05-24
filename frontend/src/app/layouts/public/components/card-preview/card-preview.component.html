@@ -7,7 +7,9 @@
     <app-card-display
       [recipientName]="data.recipientName"
       [birthDate]="data.birthDate"
-      [deathDate]="estimatedDeathDate()"
+      [deathDate]="data.deathDate"
+      [countryCode]="data.countryCode"
+      [gender]="data.gender"
     />
 
     <div class="card-preview__actions">
@@ -21,23 +23,11 @@
         {{ 'common.back' | translate }}
       </button>
 
-      <button
-        tuiButton
-        type="button"
-        size="m"
-        [disabled]="loading()"
-        (click)="submit()"
-      >
-        @if (loading()) {
-          {{ 'preview.saving' | translate }}
-        } @else {
+      <button tuiButton type="button" size="m" [disabled]="loading()" (click)="submit()">
+        <tui-loader [loading]="loading()" [overlay]="true" [inheritColor]="true" size="s">
           {{ 'preview.share' | translate }}
-        }
+        </tui-loader>
       </button>
     </div>
-
-    <p class="card-preview__note">
-      {{ 'preview.note' | translate }}
-    </p>
   </div>
 }

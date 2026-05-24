@@ -5,7 +5,12 @@ import { IEntity } from './entity.interface';
 export interface ICard extends IEntity {
   recipientName: string;
   birthDate: string | Date;
-  deathDate?: string | Date;
+  expectedDeathDate: string | Date;
+  lang: string;
+  countryCode: Country;
+  gender: 'male' | 'female';
+  style: CardStyle;
+  lifeExpectancyYears: number;
   expiresAt: string | Date;
 }
 
@@ -16,4 +21,10 @@ export interface ICardCreate {
   countryCode: Country;
   gender: 'male' | 'female';
   style: CardStyle;
+}
+
+export interface ICardPreview {
+  expectedDeathDate: string | Date;
+  lifeExpectancyYears: number;
+  yearsRemaining: number;
 }

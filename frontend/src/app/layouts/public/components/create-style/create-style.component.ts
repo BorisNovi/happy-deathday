@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CardStateService, LanguageService, QueryParamsService } from '@core';
+import { CardApi, CardStateService, LanguageService, QueryParamsService } from '@core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CardStyle, Country } from '@shared';
-import { TuiButton } from '@taiga-ui/core';
+import { TuiButton, TuiLoader } from '@taiga-ui/core';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-create-style',
-  imports: [TuiButton, TranslatePipe],
+  imports: [TuiButton, TuiLoader, TranslatePipe],
   templateUrl: './create-style.component.html',
   styleUrl: './create-style.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,9 +20,12 @@ export class CreateStyleComponent {
   readonly #queryParams = inject(QueryParamsService);
   readonly #state = inject(CardStateService);
   readonly #langService = inject(LanguageService);
+  readonly #cardApi = inject(CardApi);
+  readonly #destroy = inject(DestroyRef);
 
   protected readonly styles = Object.values(CardStyle);
   protected readonly selectedStyle = signal<CardStyle>(CardStyle.Standard);
+  protected readonly loading = signal(false);
 
   constructor() {
     const parsed = this.#queryParams.parseQueryParams(this.#route.snapshot.queryParams);
@@ -38,7 +43,7 @@ export class CreateStyleComponent {
     const parsed = this.#queryParams.parseQueryParams(this.#route.snapshot.queryParams);
     const name = parsed['name'] as string | undefined;
     const birthDate = parsed['birthDate'] instanceof Date ? parsed['birthDate'] : null;
-    const countryCode = parsed['countryCode'] as Country;
+    const countryCode = (parsed['countryCode'] as Country | undefined) ?? Country.WW;
     const gender = parsed['gender'] as 'male' | 'female' | undefined;
 
     if (!name || !birthDate || !gender) {
@@ -46,15 +51,27 @@ export class CreateStyleComponent {
       return;
     }
 
-    this.#state.set({
-      recipientName: name,
-      birthDate,
-      lang: this.#langService.currentLanguageOption().value,
-      countryCode,
-      gender,
-      style: this.selectedStyle(),
-    });
-    this.#router.navigate(['/public/card-preview'], { queryParamsHandling: 'preserve' });
+    this.loading.set(true);
+    this.#cardApi
+      .preview({ birthDate, countryCode, gender })
+      .pipe(
+        takeUntilDestroyed(this.#destroy),
+        finalize(() => this.loading.set(false)),
+      )
+      .subscribe({
+        next: ({ expectedDeathDate }) => {
+          this.#state.set({
+            recipientName: name,
+            birthDate,
+            deathDate: new Date(expectedDeathDate),
+            lang: this.#langService.currentLanguageOption().value,
+            countryCode,
+            gender,
+            style: this.selectedStyle(),
+          });
+          this.#router.navigate(['/public/card-preview'], { queryParamsHandling: 'preserve' });
+        },
+      });
   }
 
   protected back(): void {

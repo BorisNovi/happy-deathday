@@ -36,9 +36,8 @@
       <tui-error formControlName="birthDate" />
     </div>
 
-    TODO: сделалть значение по умолчанию ww
     <div class="create-form__field">
-      <tui-textfield>
+      <tui-textfield [tuiTextfieldCleaner]="false">
         <label tuiLabel for="countryCode">{{ 'createCard.form.country.label' | translate }}</label>
         <input
           id="countryCode"
@@ -52,6 +51,7 @@
             <button tuiOption [value]="c">{{ 'country.' + c | translate }}</button>
           }
         </tui-data-list>
+        <tui-icon [tuiTooltip]="'createCard.form.country.hint' | translate" />
       </tui-textfield>
       <tui-error formControlName="countryCode" />
     </div>

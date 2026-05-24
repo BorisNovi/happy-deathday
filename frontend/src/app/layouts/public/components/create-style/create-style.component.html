@@ -24,8 +24,10 @@
     <button tuiButton type="button" appearance="outline" size="m" (click)="back()">
       {{ 'common.back' | translate }}
     </button>
-    <button tuiButton type="button" size="m" (click)="preview()">
-      {{ 'createCard.style.preview' | translate }}
+    <button tuiButton type="button" size="m" [disabled]="loading()" (click)="preview()">
+      <tui-loader [loading]="loading()" [overlay]="true" [inheritColor]="true" size="s">
+        {{ 'createCard.style.preview' | translate }}
+      </tui-loader>
     </button>
   </div>
 </div>

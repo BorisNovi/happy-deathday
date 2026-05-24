@@ -9,12 +9,12 @@ import { TuiDay } from '@taiga-ui/cdk';
 import { TuiButton, TuiDataList, TuiError, TuiGroup, TuiIcon, TuiInput, TuiRadio } from '@taiga-ui/core';
 import { TUI_ITEMS_HANDLERS } from '@taiga-ui/core/directives/items-handlers';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/core/tokens';
-import { TuiBlock, TuiComboBox, TuiInputDate } from '@taiga-ui/kit';
+import { TuiBlock, TuiComboBox, TuiInputDate, TuiTooltip } from '@taiga-ui/kit';
 import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-create-form',
-  imports: [ReactiveFormsModule, TuiInput, TuiInputDate, TuiButton, TuiError, TuiGroup, TuiBlock, TuiRadio, TuiIcon, TuiComboBox, TuiDataList, TranslatePipe],
+  imports: [ReactiveFormsModule, TuiInput, TuiInputDate, TuiButton, TuiError, TuiGroup, TuiBlock, TuiRadio, TuiIcon, TuiComboBox, TuiDataList, TuiTooltip, TranslatePipe],
   templateUrl: './create-form.component.html',
   styleUrl: './create-form.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,12 +33,14 @@ import { debounceTime } from 'rxjs';
     },
     {
       provide: TUI_ITEMS_HANDLERS,
-      useFactory: (translate: TranslateService) => ({
-        stringify: signal((countryCode: Country) => translate.instant(`country.${countryCode}`)),
-        identityMatcher: signal((a: unknown, b: unknown) => a === b),
-        disabledItemHandler: signal(() => false),
-      }),
-      deps: [TranslateService],
+      useFactory: () => {
+        const translate = inject(TranslateService);
+        return {
+          stringify: () => (countryCode: Country) => translate.instant(`country.${countryCode}`),
+          identityMatcher: signal((a: unknown, b: unknown) => a === b),
+          disabledItemHandler: signal(() => false),
+        };
+      }
     },
   ],
 })
@@ -55,7 +57,7 @@ export class CreateFormComponent {
   protected readonly form = this.#fb.group({
     recipientName: this.#fb.nonNullable.control('', [Validators.required, Validators.maxLength(30)]),
     birthDate: this.#fb.control<TuiDay | null>(null, Validators.required),
-    countryCode: this.#fb.control<Country | null>(null),
+    countryCode: this.#fb.control<Country | null>(Country.WW),
     gender: this.#fb.control<'male' | 'female' | null>(null, Validators.required),
   });
 
