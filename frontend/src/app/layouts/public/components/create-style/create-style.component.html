@@ -7,16 +7,18 @@
     [attr.aria-label]="'createCard.style.title' | translate"
   >
     @for (style of styles; track style) {
-      <button
-        class="create-style__card"
-        type="button"
-        [class.create-style__card--selected]="selectedStyle() === style"
-        [attr.aria-pressed]="selectedStyle() === style"
-        (click)="selectStyle(style)"
-      >
-        <span class="create-style__card-preview create-style__card-preview--{{ style }}"></span>
-        <span class="create-style__card-label">{{ 'createCard.style.options.' + style | translate }}</span>
-      </button>
+      <div class="create-style__card">
+        <button
+          class="create-style__card__btn"
+          type="button"
+          [class.create-style__card--selected]="selectedStyle() === style"
+          [attr.aria-pressed]="selectedStyle() === style"
+          (click)="selectStyle(style)"
+        >
+          <img src="assets/images/card-style-{{ style }}.png" alt="card preview {{ style }}" class="create-style__card__preview">
+        </button>
+        <span class="create-style__card__label">{{ 'createCard.style.options.' + style | translate }}</span>
+      </div>
     }
   </div>
 

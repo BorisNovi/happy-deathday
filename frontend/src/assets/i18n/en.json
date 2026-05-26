@@ -122,6 +122,12 @@
     "nl": "Netherlands",
     "rs": "Serbia"
   },
+  "error": {
+    "title": "Error",
+    "network": "Cannot reach the server. Please check your internet connection.",
+    "server": "Server error. Please try again later.",
+    "client": "Invalid request. Please try again."
+  },
   "notFound": {
     "title": "Page is dead",
     "message1": "It existed once, but time took its toll.",

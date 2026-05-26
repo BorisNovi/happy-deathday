@@ -7,10 +7,10 @@ import {
 } from '@angular/core';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
+import { errorInterceptor, TransferStateLoader } from '@core';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { provideTaiga } from '@taiga-ui/core';
 import { routes } from './app.routes';
-import { TransferStateLoader } from './core/language/transfer-state.loader';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideZonelessChangeDetection(),
-    provideHttpClient(withInterceptors([]), withFetch()),
+    provideHttpClient(withInterceptors([errorInterceptor]), withFetch()),
     provideTaiga(),
     importProvidersFrom(
       TranslateModule.forRoot({
