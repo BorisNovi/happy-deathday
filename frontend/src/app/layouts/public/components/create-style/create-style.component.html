@@ -11,7 +11,7 @@
         <button
           class="create-style__card__btn"
           type="button"
-          [class.create-style__card--selected]="selectedStyle() === style"
+          [class.create-style__card__btn--selected]="selectedStyle() === style"
           [attr.aria-pressed]="selectedStyle() === style"
           (click)="selectStyle(style)"
         >
@@ -23,13 +23,15 @@
   </div>
 
   <div class="create-style__actions">
-    <button tuiButton type="button" appearance="outline" size="m" (click)="back()">
+    <button tuiButton type="button" appearance="flat" size="m" (click)="back()">
+      <tui-icon icon="@tui.chevron-left" />
       {{ 'common.back' | translate }}
     </button>
     <button tuiButton type="button" size="m" [disabled]="loading()" (click)="preview()">
       <tui-loader [loading]="loading()" [overlay]="true" [inheritColor]="true" size="s">
         {{ 'createCard.style.preview' | translate }}
       </tui-loader>
+      <tui-icon icon="@tui.chevron-right" />
     </button>
   </div>
 </div>

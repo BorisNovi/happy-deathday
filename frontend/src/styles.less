@@ -12,7 +12,6 @@ body {
   --red: #D84040;
   --red-hover: #e06060;
   --red-pressed: #932b2b;
-  // --cream: #f5efe6;
   --warm-white: #faf7f2;
   --ink: #1a1510;
   --brown: #5c3d2e;
@@ -29,17 +28,24 @@ body {
 
   // media
   --lang-btn-display: inline;
+  --card-style-grid: repeat(4, 1fr);
+  --card-style-gap: 6rem;
+  --btn-min-w: 12rem;
 
   @media (max-width: 480px) {
     --lang-btn-display: none;
+  }
+
+  @media (max-width: 768px) {
+    --card-style-grid: repeat(2, 1fr);
+    --card-style-gap: 1rem;
+    --btn-min-w: 8rem;
   }
 }
 
 body[tuiTheme='dark'] {
   --bg: #323232;
   --text-action: #f2f2f2;
-  --primary: #D84040;
-  // --cream: #1a1510;
   --warm-white: #221c16;
   --ink: #f5efe6;
   --brown: #c4956a;

@@ -52,11 +52,12 @@
 
   &__actions {
     display: flex;
+    justify-content: center;
     gap: 0.5rem;
-    margin-top: 0.75rem;
+    margin-top: 3rem;
 
-    button:last-child {
-      flex: 1;
+    & > * {
+      min-width: var(--btn-min-w);
     }
   }
 }

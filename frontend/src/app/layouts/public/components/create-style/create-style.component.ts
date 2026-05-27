@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CardApi, CardStateService, LanguageService, QueryParamsService } from '@core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CardStyle, Country } from '@shared';
-import { TuiButton, TuiLoader } from '@taiga-ui/core';
+import { TuiButton, TuiIcon, TuiLoader } from '@taiga-ui/core';
 import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-create-style',
-  imports: [TuiButton, TuiLoader, TranslatePipe],
+  imports: [TuiButton, TuiLoader, TuiIcon, TranslatePipe],
   templateUrl: './create-style.component.html',
   styleUrl: './create-style.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
