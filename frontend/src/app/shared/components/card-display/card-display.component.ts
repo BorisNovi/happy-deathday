@@ -10,9 +10,9 @@ import {
 } from '@angular/core';
 import { LanguageService } from '@core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { Country } from '@shared';
+import { CardStyle, Country } from '@shared';
 
-const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'] as const;
+// const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'] as const;
 
 @Component({
   selector: 'app-card-display',
@@ -20,11 +20,13 @@ const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'
   templateUrl: './card-display.component.html',
   styleUrl: './card-display.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[attr.data-style]': 'style()' },
 })
 export class CardDisplayComponent {
   readonly recipientName = input.required<string>();
   readonly birthDate = input.required<Date>();
   readonly deathDate = input.required<Date>();
+  readonly style = input<CardStyle | undefined>(undefined);
   readonly countryCode = input<Country | undefined>(undefined);
   readonly gender = input<'male' | 'female' | undefined>(undefined);
   readonly quote = input<string | undefined>(undefined);
@@ -48,52 +50,47 @@ export class CardDisplayComponent {
     });
   }
 
-  #pluralMonths(n: number): string {
+  #plural(n: number, type: 'year' | 'month' | 'day'): string {
     const m10 = n % 10, m100 = n % 100;
-    if (m100 >= 11 && m100 <= 14) return this.#translate.instant('card.age.month.many');
-    if (m10 === 1) return this.#translate.instant('card.age.month.one');
-    if (m10 >= 2 && m10 <= 4) return this.#translate.instant('card.age.month.few');
-    return this.#translate.instant('card.age.month.many');
-  }
-
-  #pluralYears(n: number): string {
-    const m10 = n % 10, m100 = n % 100;
-    if (m100 >= 11 && m100 <= 14) return this.#translate.instant('card.age.year.many');
-    if (m10 === 1) return this.#translate.instant('card.age.year.one');
-    if (m10 >= 2 && m10 <= 4) return this.#translate.instant('card.age.year.few');
-    return this.#translate.instant('card.age.year.many');
+    const form = (m100 >= 11 && m100 <= 14) ? 'many'
+      : m10 === 1 ? 'one'
+      : (m10 >= 2 && m10 <= 4) ? 'few'
+      : 'many';
+    return this.#translate.instant(`card.age.${type}.${form}`);
   }
 
   #pad(n: number, len = 2): string {
     return String(n).padStart(len, '0');
   }
 
-  protected readonly birthDateFormatted = computed<string>(() => {
-    const d = this.birthDate();
-    return `${d.getDate()} · ${ROMAN[d.getMonth()]} · ${d.getFullYear()}`;
-  });
+
+  // protected readonly birthDateFormatted = computed<string>(() => {
+  //   const d = this.birthDate();
+  //   return `${d.getDate()} · ${ROMAN[d.getMonth()]} · ${d.getFullYear()}`;
+  // });
 
   protected readonly deathDateLabel = computed<string>(() => {
     const d = this.deathDate();
     return `${this.#pad(d.getDate())}.${this.#pad(d.getMonth() + 1)}.${d.getFullYear()}`;
   });
 
-  protected readonly ageDisplay = computed<string>(() => {
+    protected readonly ageDisplay = computed(() => {
     const lang = this.currentLang();
     const now = this.#now();
     if (!now)
-      return '';
+      return {};
     const elapsed = now.getTime() - this.birthDate().getTime();
     const years = Math.floor(elapsed / (365.25 * 86_400_000));
     const months = Math.floor((elapsed % (365.25 * 86_400_000)) / (30.44 * 86_400_000));
     const days = Math.floor(elapsed / 86_400_000);
-    return this.#translate.instant('card.age.format', {
+    return {
       years,
-      yearWord: this.#pluralYears(years),
+      yearWord: this.#plural(years, 'year'),
       months,
-      monthWord: this.#pluralMonths(months),
+      monthWord: this.#plural(months, 'month'),
       days: days.toLocaleString(lang),
-    });
+      dayWord: this.#plural(months, 'day'),
+    };
   });
 
   protected readonly countdown = computed<Record<'days' | 'hours' | 'mins' | 'secs', number>>(() => {
@@ -136,8 +133,8 @@ export class CardDisplayComponent {
     const genderLabel = g ? this.#translate.instant(`createCard.form.gender.${g}`) : '';
     const suffix = [country, genderLabel].filter(Boolean).join(', ');
     return suffix
-      ? `${years} ${this.#pluralYears(years)}, ${suffix}`
-      : `${years} ${this.#pluralYears(years)}`;
+      ? `${years} ${this.#plural(years, 'year')}, ${suffix}`
+      : `${years} ${this.#plural(years, 'year')}`;
   });
 
   protected readonly message = computed<string>(() => {

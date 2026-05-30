@@ -1,6 +1,8 @@
 {
   "common": {
-    "back": "Назад"
+    "back": "Назад",
+    "and": "и",
+    "or": "или"
   },
   "topbar": {
     "lang": "Выбрать язык",
@@ -65,11 +67,11 @@
     "loading": "Загружаем открытку…",
     "notFound": "Открытка не найдена или срок её действия истёк.",
     "header": {
-      "eyebrow": "— ещё один оборот",
+      "eyebrow": "Вам исполнилось",
       "title": "С днём рождения,"
     },
     "age": {
-      "format": "{{years}} {{yearWord}} и {{months}} {{monthWord}} · {{days}} дней",
+      "format": "{{years}} {{yearWord}} и {{months}} {{monthWord}} или {{days}} дней",
       "year": {
         "one": "год",
         "few": "года",
@@ -79,6 +81,11 @@
         "one": "месяц",
         "few": "месяца",
         "many": "месяцев"
+      },
+      "day": {
+        "one": "день",
+        "few": "дня",
+        "many": "дней"
       }
     },
     "countdown": {

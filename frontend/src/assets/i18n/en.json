@@ -1,6 +1,8 @@
 {
   "common": {
-    "back": "Back"
+    "back": "Back",
+    "and": "and",
+    "or": "or"
   },
   "topbar": {
     "lang": "Select language",
@@ -65,11 +67,11 @@
     "loading": "Loading card…",
     "notFound": "Card not found or has expired.",
     "header": {
-      "eyebrow": "— one more lap",
+      "eyebrow": "You are",
       "title": "Happy birthday,"
     },
     "age": {
-      "format": "{{years}} {{yearWord}} and {{months}} {{monthWord}} · {{days}} days",
+      "format": "{{years}} {{yearWord}} and {{months}} {{monthWord}} or {{days}} days",
       "year": {
         "one": "year",
         "few": "years",
@@ -79,6 +81,11 @@
         "one": "month",
         "few": "months",
         "many": "months"
+      },
+      "day": {
+        "one": "day",
+        "few": "days",
+        "many": "days"
       }
     },
     "countdown": {

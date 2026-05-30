@@ -2,132 +2,133 @@
   display: block;
   width: 100%;
   max-width: 620px;
+
+  // ── standard (default) ──────────────────────────────────────────────────
+  --card-bg: #ffffff;
+  --card-border: 1px solid #d7d7d7;
+  --card-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  --card-title-font: 'Manrope', sans-serif;
+  --card-title-style: normal;
+  --card-title-weight: 800;
+  --card-title-color: #1d1616;
+  --card-name-color: #d84040;
+  --card-text-primary: #1d1616;
+  --card-text-muted: #1d1616;
+  --card-message-font: 'Manrope', sans-serif;
+  --card-message-style: normal;
+  --card-message-color: #1d1616;
+  --card-num-color: #d84040;
+  --card-sep-color: #d84040;
+  --card-progress-track: #e8e8e8;
+  --card-progress-fill: #d84040;
+  --card-countdown-bg: #f2f2f2;
+  --card-countdown-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
 }
 
+// ── official ────────────────────────────────────────────────────────────────
+:host([data-style='official']) {
+  --card-border: 2px solid var(--ink);
+  --card-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.07);
+  --card-title-style: normal;
+  --card-title-weight: 700;
+}
+
+// ── vintage ─────────────────────────────────────────────────────────────────
+:host([data-style='vintage']) {
+  --card-bg: #f0dfc0;
+  --card-border: 1px dashed #9b7b52;
+  --card-shadow:
+    2px 4px 12px rgba(100, 60, 20, 0.2),
+    0 0 0 3px rgba(155, 123, 82, 0.15);
+  --card-title-font: 'Playfair Display', serif;
+  --card-title-style: italic;
+  --card-title-color: #2e1f14;
+  --card-name-color: #8b3a1a;
+  --card-text-primary: #2e1f14;
+  --card-text-muted: #7b5a40;
+  --card-message-font: 'Playfair Display', serif;
+  --card-message-style: italic;
+  --card-message-color: #5c3d2e;
+  --card-num-color: #2e1f14;
+  --card-sep-color: #c5a882;
+  --card-progress-track: #d5b892;
+  --card-progress-fill: #8b3a1a;
+  --card-countdown-bg: rgba(155, 123, 82, 0.1);
+  --card-countdown-shadow: inset 0 2px 3px rgba(100, 60, 20, 0.15);
+}
+
+// ── elegant ─────────────────────────────────────────────────────────────────
+:host([data-style='elegant']) {
+  --card-bg: #0f0e0c;
+  --card-border: 1px solid rgba(255, 255, 255, 0.06);
+  --card-shadow:
+    0 4px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --card-title-font: 'Playfair Display', serif;
+  --card-title-style: normal;
+  --card-title-color: #f5f0e8;
+  --card-name-color: #d4a843;
+  --card-text-primary: #f5f0e8;
+  --card-text-muted: rgba(245, 240, 232, 0.4);
+  --card-message-font: 'Playfair Display', serif;
+  --card-message-style: italic;
+  --card-message-color: rgba(245, 240, 232, 0.65);
+  --card-num-color: #f5f0e8;
+  --card-sep-color: #d4a843;
+  --card-progress-track: rgba(255, 255, 255, 0.06);
+  --card-progress-fill: #d4a843;
+  --card-countdown-bg: rgba(255, 255, 255, 0.04);
+  --card-countdown-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+// ── component ────────────────────────────────────────────────────────────────
 .card {
-  background: var(--warm-white);
-  border: 1px solid var(--pale);
-  padding: 3.5rem 3rem 3rem;
+  border-radius: 12px;
+  background: var(--card-bg);
+  border: var(--card-border);
+  padding: 3.25rem 4.5rem 3rem;
   position: relative;
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    0 8px 32px rgba(92, 61, 46, 0.08),
-    inset 0 2px 0 0 var(--pale);
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border-color: var(--brown);
-    border-style: solid;
-    opacity: 0.35;
-  }
-
-  &::before {
-    top: 16px;
-    left: 16px;
-    border-width: 1px 0 0 1px;
-  }
-
-  &::after {
-    bottom: 16px;
-    right: 16px;
-    border-width: 0 1px 1px 0;
-  }
-
-  &__corner {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border-color: var(--brown);
-    border-style: solid;
-    opacity: 0.35;
-
-    &--tr {
-      top: 16px;
-      right: 16px;
-      border-width: 1px 1px 0 0;
-    }
-
-    &--bl {
-      bottom: 16px;
-      left: 16px;
-      border-width: 0 0 1px 1px;
-    }
-  }
+  box-shadow: var(--card-shadow);
 
   &__header {
     text-align: center;
     margin-bottom: 2.5rem;
 
     .card__eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.35em;
-      color: var(--muted);
-      text-transform: uppercase;
+      color: var(--card-text-muted);
       margin-bottom: 1rem;
+      &__age {
+        color: var(--card-name-color);
+        font-weight: 800;
+      }
     }
 
     .card__title {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: clamp(2rem, 7vw, 3.2rem);
-      font-weight: 400;
-      color: var(--ink);
+      font-family: var(--card-title-font);
+      font-style: var(--card-title-style);
+      font-size: clamp(2rem, 7vw, 2.75rem);
+      font-weight: var(--card-title-weight);
+      color: var(--card-title-color);
       line-height: 1.1;
       margin-bottom: 0.5rem;
 
       &-name {
         font-style: normal;
         font-weight: 700;
-        color: var(--accent);
+        color: var(--card-name-color);
       }
-    }
-
-    .card__badge {
-      display: inline-block;
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      color: var(--brown);
-      border: 1px solid var(--pale);
-      padding: 4px 14px;
-      margin-top: 0.75rem;
-      background: var(--bg);
-    }
-  }
-
-  &__divider {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 2rem 0;
-    opacity: 0.4;
-
-    &::before,
-    &::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--brown);
-    }
-
-    .card__divider-icon {
-      font-size: 12px;
-      color: var(--brown);
     }
   }
 
   &__message {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--card-message-font);
     font-size: 1.05rem;
     line-height: 1.8;
-    color: var(--brown);
+    color: var(--card-message-color);
     text-align: center;
-    font-style: italic;
+    font-style: var(--card-message-style);
     margin-bottom: 2.5rem;
   }
 
@@ -135,7 +136,7 @@
     font-family: 'DM Mono', monospace;
     font-size: 9px;
     letter-spacing: 0.3em;
-    color: var(--muted);
+    color: var(--card-text-muted);
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 1.25rem;
@@ -145,8 +146,12 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    margin-bottom: 0.5rem;
     gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--card-countdown-bg);
+    box-shadow: var(--card-countdown-shadow);
+    border-radius: 0.75rem;
 
     .card__unit {
       display: flex;
@@ -157,7 +162,7 @@
         font-family: 'DM Mono', monospace;
         font-size: clamp(22px, 6vw, 42px);
         font-weight: 500;
-        color: var(--ink);
+        color: var(--card-num-color);
         line-height: 1;
         letter-spacing: -0.03em;
         transition: opacity 0.5s;
@@ -171,7 +176,7 @@
         font-family: 'DM Mono', monospace;
         font-size: 8px;
         letter-spacing: 0.2em;
-        color: var(--muted);
+        color: var(--card-text-muted);
         margin-top: 5px;
         text-transform: uppercase;
       }
@@ -180,7 +185,7 @@
     .card__sep {
       font-family: 'DM Mono', monospace;
       font-size: clamp(18px, 5vw, 34px);
-      color: var(--pale);
+      color: var(--card-sep-color);
       padding: 0 1px;
       line-height: 1;
       align-self: baseline;
@@ -190,14 +195,16 @@
 
   &__progress {
     width: 100%;
-    margin: 1.5rem 0 0.5rem;
-    height: 1px;
-    background: var(--pale);
+    margin: 0 0 0.5rem;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--card-progress-track);
     position: relative;
 
     .card__progress-bar {
       height: 100%;
-      background: var(--accent);
+      border-radius: 3px;
+      background: var(--card-progress-fill);
       transition: width 1s linear;
     }
   }
@@ -206,21 +213,21 @@
     font-family: 'DM Mono', monospace;
     font-size: 9px;
     letter-spacing: 0.12em;
-    color: var(--muted);
+    color: var(--card-text-muted);
     text-align: center;
     margin-top: 0.75rem;
     text-transform: uppercase;
   }
 
   &__quote {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--card-message-font);
     font-style: italic;
     font-size: 0.8rem;
-    color: var(--muted);
+    color: var(--card-text-muted);
     text-align: center;
     margin-top: 2rem;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--pale);
+    border-top: 1px solid var(--card-progress-track);
     letter-spacing: 0.05em;
   }
 

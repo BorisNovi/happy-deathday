@@ -1,21 +1,18 @@
 <article class="card" [attr.lang]="currentLang()">
-  <span class="card__corner card__corner--tr" aria-hidden="true"></span>
-  <span class="card__corner card__corner--bl" aria-hidden="true"></span>
-
   <header class="card__header">
-    <p class="card__eyebrow">{{ birthDateFormatted() }} {{ 'card.header.eyebrow' | translate }}</p>
+    @if (ageDisplay(); as d) {
+      <p class="card__eyebrow">
+        {{ 'card.header.eyebrow' | translate }} 
+        <span class="card__eyebrow__age">{{ d?.years }} {{ d?.yearWord }} {{ 'common.and' | translate }} {{ d?.months }} {{ d?.monthWord }}</span> 
+        {{ 'common.or' | translate }}
+        <span class="card__eyebrow__age">{{ d?.days }} {{ d?.dayWord }}</span>
+      </p>
+    }
     <h1 class="card__title">
       {{ 'card.header.title' | translate }}<br>
       <span class="card__title-name">{{ recipientName() }}</span>
     </h1>
-    @if (ageDisplay()) {
-      <span class="card__badge">{{ ageDisplay() }}</span>
-    }
   </header>
-
-  <div class="card__divider" aria-hidden="true">
-    <span class="card__divider-icon">✦</span>
-  </div>
 
   <p class="card__message">{{ message() }}</p>
 
