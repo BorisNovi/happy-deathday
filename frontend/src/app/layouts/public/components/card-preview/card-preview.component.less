@@ -6,25 +6,24 @@
   overflow: hidden;
 }
 
-// TODO: перевернуть руки скелета
 .hands {
   position: absolute;
   left: 0;
   right: 0;
-  top: -16vh;
+  top: 30vh;
   pointer-events: none;
-  filter: var(--images-filter);
+  filter: drop-shadow(2px 4px 6px black) opacity(.7);
 
   &__left {
     position: absolute;
     left: 0;
-    transform: translateX(calc(-100% + 35vw));
+    transform: translateX(calc(-142% + 50vw)) scaleY(-1); 
   }
 
   &__right {
     position: absolute;
     right: 0;
-    transform: translateX(calc(100% - 35vw));
+    transform: translateX(calc(142% - 50vw)) scaleY(-1);
   }
 }
 
@@ -43,7 +42,7 @@
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    max-width: 620px;
+    max-width: 700px;
 
     & > * {
       min-width: var(--btn-min-w);

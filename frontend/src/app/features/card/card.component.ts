@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CardApi } from '@core';
 import { CardDisplayComponent } from '@shared';
@@ -8,7 +8,7 @@ import { EMPTY, catchError, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-card',
-  imports: [CardDisplayComponent, TranslatePipe],
+  imports: [CardDisplayComponent, TranslatePipe, RouterLink],
   templateUrl: './card.component.html',
   styleUrl: './card.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,6 +33,8 @@ export class CardComponent {
       ),
     ),
   );
+
+  protected readonly cardStyle = computed(() => this.card()?.style ?? null);
 
   protected readonly birthDate = computed(() => {
     const c = this.card();

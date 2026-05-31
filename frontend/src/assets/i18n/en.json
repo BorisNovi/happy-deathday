@@ -61,7 +61,15 @@
   },
   "preview": {
     "saving": "Saving…",
-    "share": "Share"
+    "create": "Create",
+    "copied": "Link copied",
+    "createAnother": "Create another",
+    "copyLink": "Copy link",
+    "openInNewTab": "Open in new tab"
+  },
+  "cardPage": {
+    "logoAriaLabel": "Happy DeathDay — go to home",
+    "create": "Create your own card"
   },
   "card": {
     "loading": "Loading card…",

@@ -14,21 +14,32 @@
     />
 
     <div class="card-preview__actions">
-      <button
-        tuiButton
-        type="button"
-        appearance="outline"
-        size="m"
-        (click)="goBack()"
-      >
-        {{ 'common.back' | translate }}
-      </button>
-
-      <button tuiButton type="button" size="m" [disabled]="loading()" (click)="submit()">
-        <tui-loader [loading]="loading()" [overlay]="true" [inheritColor]="true" size="s">
-          {{ 'preview.share' | translate }}
-        </tui-loader>
-      </button>
+      @if (createdCardId()) {
+        <button tuiButton type="button" appearance="outline" size="m" (click)="createAnother()">
+          <tui-icon icon="@tui.chevron-left" />
+          {{ 'preview.createAnother' | translate }}
+        </button>
+        <button tuiButton type="button" appearance="outline" size="m" (click)="copyLink()">
+          <tui-icon icon="@tui.copy" />
+          {{ 'preview.copyLink' | translate }}
+        </button>
+        <button tuiButton type="button" size="m" (click)="openCard()">
+          <tui-icon icon="@tui.external-link" />
+          {{ 'preview.openInNewTab' | translate }}
+        </button>
+      }
+      @else {
+        <button tuiButton type="button" appearance="outline" size="m" (click)="goBack()">
+          <tui-icon icon="@tui.chevron-left" />
+          {{ 'common.back' | translate }}
+        </button>
+        <button tuiButton type="button" size="m" [disabled]="loading()" (click)="submit()">
+          <tui-loader [loading]="loading()" [overlay]="true" [inheritColor]="true" size="s">
+            {{ 'preview.create' | translate }}
+            <tui-icon icon="@tui.chevron-right" />
+          </tui-loader>
+        </button>
+      }
     </div>
   </div>
 }

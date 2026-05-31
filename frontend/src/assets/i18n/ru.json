@@ -61,7 +61,15 @@
   },
   "preview": {
     "saving": "Сохраняем…",
-    "share": "Поделиться"
+    "create": "Создать",
+    "copied": "Ссылка скопирована",
+    "createAnother": "Создать ещё",
+    "copyLink": "Скопировать ссылку",
+    "openInNewTab": "Открыть в новой вкладке"
+  },
+  "cardPage": {
+    "logoAriaLabel": "Happy DeathDay — на главную",
+    "create": "Создать свою открытку"
   },
   "card": {
     "loading": "Загружаем открытку…",

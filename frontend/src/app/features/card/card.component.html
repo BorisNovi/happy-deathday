@@ -1,4 +1,8 @@
-<div class="card-page">
+<div class="hands">
+  <img class="hands__left" src="assets/images/left-hand-l.svg" alt="skeleton-left-hand">
+  <img class="hands__right" src="assets/images/right-hand-l.svg" alt="skeleton-right-hand">
+</div>
+<div class="card-page" [attr.data-style]="cardStyle()">
   @if (error()) {
     <p class="card-page__error" role="alert">{{ error() }}</p>
   }
@@ -19,4 +23,6 @@
   @else {
     <p class="card-page__loading" aria-live="polite" aria-busy="true">{{ 'card.loading' | translate }}</p>
   }
+
+  <a class="card-page__cta" routerLink="/public">Happy DeathDay · {{ 'cardPage.create' | translate }}</a>
 </div>

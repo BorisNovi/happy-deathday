@@ -8,14 +8,14 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardApi, CardStateService, LanguageService, QueryParamsService } from '@core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CardDisplayComponent, CardStyle, Country } from '@shared';
-import { TuiButton, TuiLoader } from '@taiga-ui/core';
+import { TuiButton, TuiIcon, TuiLoader, TuiNotificationService } from '@taiga-ui/core';
 import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-card-preview',
-  imports: [CardDisplayComponent, TuiButton, TuiLoader, TranslatePipe],
+  imports: [CardDisplayComponent, TuiButton, TuiLoader, TuiIcon, TranslatePipe],
   templateUrl: './card-preview.component.html',
   styleUrl: './card-preview.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,10 +27,13 @@ export class CardPreviewComponent {
   readonly #route = inject(ActivatedRoute);
   readonly #queryParams = inject(QueryParamsService);
   readonly #langService = inject(LanguageService);
+  readonly #translate = inject(TranslateService);
   readonly #destroy = inject(DestroyRef);
+  readonly #notifications = inject(TuiNotificationService);
 
   protected readonly formData = this.#state.formData;
   protected readonly loading = signal(false);
+  protected readonly createdCardId = signal<string | null>(null);
 
   constructor() {
     if (!this.#state.formData()) {
@@ -98,10 +101,32 @@ export class CardPreviewComponent {
         finalize(() => this.loading.set(false)),
       )
       .subscribe({
-        next: card => {
-          this.#state.clear();
-          this.#router.navigate(['/card', card.id]);
-        },
+        next: card =>this.createdCardId.set(String(card.id)),
       });
+  }
+
+  protected createAnother(): void {
+    this.#state.clear();
+    this.#router.navigate(['/public']);
+  }
+
+  protected copyLink(): void {
+    const id = this.createdCardId();
+    if (!id)
+      return;
+    navigator.clipboard
+      .writeText(`${window.location.origin}/card/${id}`)
+      .then(() => {
+        this.#notifications
+          .open(this.#translate.instant('preview.copied'), { appearance: 'positive', autoClose: 5000 })
+          .subscribe();
+      });
+  }
+
+  protected openCard(): void {
+    const id = this.createdCardId();
+    if (!id)
+      return;
+    window.open(`${window.location.origin}/card/${id}`, '_blank');
   }
 }
