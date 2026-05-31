@@ -5,102 +5,166 @@
 
   // ── standard (default) ──────────────────────────────────────────────────
   --card-bg: #ffffff;
-  --card-border: 1px solid #d7d7d7;
-  --card-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  --card-border: none;
+  --card-shadow:
+    0 0 0 1px #0000000d,
+    0 4px 8px #0000000a,
+    0 24px 48px #00000017;
   --card-title-font: 'Manrope', sans-serif;
   --card-title-style: normal;
   --card-title-weight: 800;
-  --card-title-color: #1d1616;
+  --card-title-color: #1a1212;
   --card-name-color: #d84040;
-  --card-text-primary: #1d1616;
-  --card-text-muted: #1d1616;
+  --card-text-primary: #1a1212;
+  --card-text-muted: #9a8585;
+  --card-divider-color: #f0e2e2;
   --card-message-font: 'Manrope', sans-serif;
   --card-message-style: normal;
-  --card-message-color: #1d1616;
-  --card-num-color: #d84040;
+  --card-message-color: #4a3838;
+  --card-badge-bg: #fdf5f5;
+  --card-badge-border: #eddada;
+  --card-badge-color: #d84040;
+  --card-num-color: #1a1212;
   --card-sep-color: #d84040;
-  --card-progress-track: #e8e8e8;
+  --card-progress-track: #f5eeee;
   --card-progress-fill: #d84040;
-  --card-countdown-bg: #f2f2f2;
-  --card-countdown-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+  --card-countdown-bg: #fafafa;
+  --card-countdown-shadow:
+    0 0 0 1px #0000000d,
+    inset 0 2px 4px #0000000a;
+  --card-countdown-unit-label: var(--card-text-muted);
+  --card-countdown-font: 'DM Mono', monospace;
+  --card-top-bar-height: 3px;
+  --card-top-bar-color: #d84040;
 }
 
 // ── official ────────────────────────────────────────────────────────────────
 :host([data-style='official']) {
-  --card-border: 2px solid var(--ink);
-  --card-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.1),
-    0 8px 24px rgba(0, 0, 0, 0.07);
+  --card-bg: #f2f1eb;
+  --card-border: 2px solid #1c1c1c;
+  --card-shadow: 4px 4px 0 #b8b5ac;
+  --card-title-font: 'Manrope', sans-serif;
   --card-title-style: normal;
   --card-title-weight: 700;
+  --card-title-color: #1c1c1c;
+  --card-name-color: #1c1c1c;
+  --card-text-primary: #1c1c1c;
+  --card-text-muted: #6e6b63;
+  --card-divider-color: #1c1c1c;
+  --card-message-font: 'Courier New', 'Courier', monospace;
+  --card-message-style: normal;
+  --card-message-color: #2e2e28;
+  --card-badge-bg: transparent;
+  --card-badge-border: #1c1c1c;
+  --card-badge-color: #1c1c1c;
+  --card-num-color: #00c853;
+  --card-sep-color: #00c853;
+  --card-countdown-font: 'Sixtyfour', monospace;
+  --card-progress-track: #ccc9c0;
+  --card-progress-fill: #1c1c1c;
+  --card-countdown-bg: #1c1c1c;
+  --card-countdown-shadow: none;
+  --card-countdown-unit-label: #e8e4d466;
+  --card-top-bar-height: 0px;
 }
 
 // ── vintage ─────────────────────────────────────────────────────────────────
 :host([data-style='vintage']) {
-  --card-bg: #f0dfc0;
-  --card-border: 1px dashed #9b7b52;
+  --card-bg: #ede0c0;
+  --card-border: 1px solid #9b7b52;
   --card-shadow:
-    2px 4px 12px rgba(100, 60, 20, 0.2),
-    0 0 0 3px rgba(155, 123, 82, 0.15);
+    0 0 0 4px #ede0c0,
+    0 0 0 6px #6a4a28,
+    2px 8px 24px #3c1e0859;
   --card-title-font: 'Playfair Display', serif;
   --card-title-style: italic;
-  --card-title-color: #2e1f14;
-  --card-name-color: #8b3a1a;
-  --card-text-primary: #2e1f14;
-  --card-text-muted: #7b5a40;
+  --card-title-weight: 700;
+  --card-title-color: #1a0e04;
+  --card-name-color: #3a1204;
+  --card-text-primary: #1a0e04;
+  --card-text-muted: #8a6040;
+  --card-divider-color: #6a4a28;
   --card-message-font: 'Playfair Display', serif;
   --card-message-style: italic;
-  --card-message-color: #5c3d2e;
-  --card-num-color: #2e1f14;
-  --card-sep-color: #c5a882;
-  --card-progress-track: #d5b892;
-  --card-progress-fill: #8b3a1a;
-  --card-countdown-bg: rgba(155, 123, 82, 0.1);
-  --card-countdown-shadow: inset 0 2px 3px rgba(100, 60, 20, 0.15);
+  --card-message-color: #2e1a08;
+  --card-badge-bg: #5a3a1a0f;
+  --card-badge-border: #9b7b52;
+  --card-badge-color: #6a4a28;
+  --card-num-color: #1a0e04;
+  --card-sep-color: #8a6040;
+  --card-progress-track: #c8a878;
+  --card-progress-fill: #3a1204;
+  --card-countdown-bg: #5a3a1a0d;
+  --card-countdown-shadow: 0 0 0 1px #5a3a1a40;
+  --card-countdown-font: 'Playfair Display', serif;
+  --card-top-bar-height: 0px;
 }
 
 // ── elegant ─────────────────────────────────────────────────────────────────
 :host([data-style='elegant']) {
-  --card-bg: #0f0e0c;
-  --card-border: 1px solid rgba(255, 255, 255, 0.06);
-  --card-shadow:
-    0 4px 40px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  --card-title-font: 'Playfair Display', serif;
+  --card-bg: #ffffff;
+  --card-border: 1px solid #ffd6d6;
+  --card-shadow: 0px 2px 3px 0px #ffc4c480;
+  --card-title-font: 'Arctika Script', cursive;
   --card-title-style: normal;
-  --card-title-color: #f5f0e8;
-  --card-name-color: #d4a843;
-  --card-text-primary: #f5f0e8;
-  --card-text-muted: rgba(245, 240, 232, 0.4);
-  --card-message-font: 'Playfair Display', serif;
-  --card-message-style: italic;
-  --card-message-color: rgba(245, 240, 232, 0.65);
-  --card-num-color: #f5f0e8;
-  --card-sep-color: #d4a843;
-  --card-progress-track: rgba(255, 255, 255, 0.06);
-  --card-progress-fill: #d4a843;
-  --card-countdown-bg: rgba(255, 255, 255, 0.04);
-  --card-countdown-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --card-title-weight: 400;
+  --card-title-color: #660000;
+  --card-name-color: #eb4747;
+  --card-text-primary: #660000;
+  --card-text-muted: #660000;
+  --card-divider-color: #eb4747;
+  --card-message-font: 'Manrope', sans-serif;
+  --card-message-style: normal;
+  --card-message-color: #660000;
+  --card-badge-bg: #fff5f5;
+  --card-badge-border: #ffd6d6;
+  --card-badge-color: #eb4747;
+  --card-num-color: #660000;
+  --card-sep-color: #eb4747;
+  --card-progress-track: #ffebeb;
+  --card-progress-fill: #eb4747;
+  --card-countdown-bg: #ffebeb;
+  --card-countdown-shadow: inset 0px 2px 3px 0px #0000001a;
+  --card-countdown-font: 'Arctika Script', cursive;
+  --card-countdown-unit-label: #660000;
+  --card-top-bar-height: 0px;
 }
 
 // ── component ────────────────────────────────────────────────────────────────
 .card {
   border-radius: 12px;
+  overflow: hidden;
   background: var(--card-bg);
   border: var(--card-border);
   padding: 3.25rem 4.5rem 3rem;
   position: relative;
   box-shadow: var(--card-shadow);
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--card-top-bar-height, 0px);
+    background: var(--card-top-bar-color, transparent);
+    pointer-events: none;
+  }
+
   &__header {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
 
     .card__eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
       color: var(--card-text-muted);
-      margin-bottom: 1rem;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+
       &__age {
-        color: var(--card-name-color);
+        color: var(--card-badge-color);
         font-weight: 800;
       }
     }
@@ -124,12 +188,12 @@
 
   &__message {
     font-family: var(--card-message-font);
-    font-size: 1.05rem;
-    line-height: 1.8;
+    font-size: 1rem;
+    line-height: 1.75;
     color: var(--card-message-color);
     text-align: center;
     font-style: var(--card-message-style);
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
 
   &__countdown-label {
@@ -139,7 +203,7 @@
     color: var(--card-text-muted);
     text-transform: uppercase;
     text-align: center;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
   }
 
   &__countdown {
@@ -159,13 +223,14 @@
       align-items: center;
 
       .card__num {
-        font-family: 'DM Mono', monospace;
+        font-family: var(--card-countdown-font);
         font-size: clamp(22px, 6vw, 42px);
         font-weight: 500;
         color: var(--card-num-color);
         line-height: 1;
         letter-spacing: -0.03em;
-        transition: opacity 0.5s;
+        transition: opacity 1s;
+        min-width: clamp(20px, 8vw, 3.5rem);
 
         &--flash {
           opacity: 0.3;
@@ -176,14 +241,14 @@
         font-family: 'DM Mono', monospace;
         font-size: 8px;
         letter-spacing: 0.2em;
-        color: var(--card-text-muted);
+        color: var(--card-countdown-unit-label);
         margin-top: 5px;
         text-transform: uppercase;
       }
     }
 
     .card__sep {
-      font-family: 'DM Mono', monospace;
+      font-family: var(--card-countdown-font);
       font-size: clamp(18px, 5vw, 34px);
       color: var(--card-sep-color);
       padding: 0 1px;
@@ -234,4 +299,137 @@
   @media (max-width: 480px) {
     padding: 2.5rem 1.5rem 2rem;
   }
+}
+
+// ── official: structural overrides ──────────────────────────────────────────
+:host([data-style='official']) {
+  .card {
+    border-radius: 2px;
+
+    &__countdown {
+      border-radius: 2px;
+      gap: 0;
+
+      .card__unit .card__num {
+        font-size: clamp(16px, 4.5vw, 30px);
+        animation: monitor-flicker 10ms linear infinite;
+      }
+
+      .card__sep {
+        font-size: clamp(12px, 3vw, 22px);
+        padding-top: 2px;
+      }
+    }
+
+    &__progress,
+    &__progress-bar {
+      border-radius: 0;
+    }
+  }
+}
+
+// ── vintage: structural overrides ───────────────────────────────────────────
+:host([data-style='vintage']) {
+  .card {
+    &__eyebrow,
+    &__countdown-label,
+    &__stats {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0.02em;
+    }
+
+    &__eyebrow {
+      font-size: 14px;
+
+      &__age {
+        font-weight: 700;
+        font-style: normal;
+      }
+    }
+
+    &__title {
+      font-size: clamp(2.5rem, 8vw, 3rem);
+      line-height: 1.05;
+      &-name {
+        font-style: italic;
+      }
+    }
+
+    &__countdown-label {
+      font-size: 14px;
+      margin-bottom: 1.25rem;
+    }
+
+    &__countdown {
+      border-radius: 4px;
+      padding: 1.5rem 2rem;
+
+      .card__unit .card__num {
+        font-size: clamp(28px, 7vw, 50px);
+        font-style: italic;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+      }
+
+      .card__sep {
+        font-size: clamp(22px, 5vw, 40px);
+        padding-top: 5px;
+      }
+    }
+
+    &__stats {
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    &__unit-label {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0.02em;
+      font-size: 10px;
+    }
+  }
+}
+
+
+// ── elegant: structural overrides ───────────────────────────────────────────
+:host([data-style='elegant']) {
+  .card {
+    &__message {
+      font-weight: 700;
+    }
+
+    &__title {
+      font-size: clamp(2rem, 8vw, 3.5rem);
+    }
+
+    &__title-name{
+      font-weight: 400;
+    }
+
+    &__countdown {
+      .card__unit .card__num {
+        font-size: clamp(16px, 8vw, 60px);
+      }
+      .card__sep {
+        font-size: clamp(12px, 6vw, 50px);
+        padding-top: 2px;
+      }
+    }
+
+    &__unit-label {
+      font-family: 'Manrope', sans-serif;
+      font-style: normal;
+      letter-spacing: 0.15em;
+      font-size: 9px;
+    }
+  }
+}
+
+@keyframes monitor-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
 }

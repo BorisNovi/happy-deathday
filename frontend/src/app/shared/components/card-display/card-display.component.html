@@ -3,7 +3,7 @@
     @if (ageDisplay(); as d) {
       <p class="card__eyebrow">
         {{ 'card.header.eyebrow' | translate }} 
-        <span class="card__eyebrow__age">{{ d?.years }} {{ d?.yearWord }} {{ 'common.and' | translate }} {{ d?.months }} {{ d?.monthWord }}</span> 
+        <span class="card__eyebrow__age">{{ d?.years }} {{ d?.yearWord }} {{ 'common.and' | translate }} {{ style() === 'vintage' ? toRoman(d?.months ?? 0) : d?.months }} {{ d?.monthWord }}</span>
         {{ 'common.or' | translate }}
         <span class="card__eyebrow__age">{{ d?.days }} {{ d?.dayWord }}</span>
       </p>

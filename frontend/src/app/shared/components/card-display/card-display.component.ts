@@ -12,7 +12,7 @@ import { LanguageService } from '@core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CardStyle, Country } from '@shared';
 
-// const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'] as const;
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'] as const;
 
 @Component({
   selector: 'app-card-display',
@@ -63,6 +63,10 @@ export class CardDisplayComponent {
     return String(n).padStart(len, '0');
   }
 
+  protected toRoman(n: number): string {
+    return ROMAN[n] ?? String(n);
+  }
+
 
   // protected readonly birthDateFormatted = computed<string>(() => {
   //   const d = this.birthDate();
@@ -89,7 +93,7 @@ export class CardDisplayComponent {
       months,
       monthWord: this.#plural(months, 'month'),
       days: days.toLocaleString(lang),
-      dayWord: this.#plural(months, 'day'),
+      dayWord: this.#plural(days, 'day'),
     };
   });
 

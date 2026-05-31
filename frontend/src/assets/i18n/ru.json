@@ -68,7 +68,7 @@
     "notFound": "Открытка не найдена или срок её действия истёк.",
     "header": {
       "eyebrow": "Вам исполнилось",
-      "title": "С днём рождения,"
+      "title": "С Днём Рождения,"
     },
     "age": {
       "format": "{{years}} {{yearWord}} и {{months}} {{monthWord}} или {{days}} дней",
