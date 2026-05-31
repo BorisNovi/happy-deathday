@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { CardApi } from '@core';
+import { CardApi, SeoService } from '@core';
 import { CardDisplayComponent } from '@shared';
 import { EMPTY, catchError, map, switchMap } from 'rxjs';
 
@@ -17,6 +18,8 @@ export class CardComponent {
   readonly #cardApi = inject(CardApi);
   readonly #route = inject(ActivatedRoute);
   readonly #translate = inject(TranslateService);
+  readonly #seo = inject(SeoService);
+  readonly #doc = inject(DOCUMENT);
 
   protected readonly error = signal<string | null>(null);
 
@@ -45,4 +48,13 @@ export class CardComponent {
     const c = this.card();
     return c ? new Date(c.expectedDeathDate) : null;
   });
+
+  constructor() {
+    effect(() => {
+      const c = this.card();
+      if (!c)
+        return;
+      this.#seo.setCardMeta(c, this.#doc.location.origin);
+    });
+  }
 }

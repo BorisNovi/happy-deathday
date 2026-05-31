@@ -11,7 +11,7 @@ export class LanguageService {
   readonly #isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   readonly availableLanguages = ['ru', 'en'];
-  readonly #defaultLanguage = 'ru';
+  readonly #defaultLanguage = 'en';
 
   readonly #currentLang = signal<string>(this.#getInitialLanguage());
 

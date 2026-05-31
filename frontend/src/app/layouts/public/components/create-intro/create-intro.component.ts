@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { TuiButton, TuiIcon } from '@taiga-ui/core';
-import { CardStateService } from '@core';
+import { CardStateService, LanguageService, SeoService } from '@core';
 
 @Component({
   selector: 'app-create-intro',
@@ -14,10 +14,23 @@ import { CardStateService } from '@core';
 export class CreateIntroComponent {
   readonly #router = inject(Router);
   readonly #state = inject(CardStateService);
+  readonly #seo = inject(SeoService);
+  readonly #translate = inject(TranslateService);
+  readonly #lang = inject(LanguageService);
 
   constructor() {
     this.#state.clear();
     this.#router.navigate(['/public/create/intro'], { replaceUrl: true });
+
+    effect(() => {
+      const lang = this.#lang.currentLang();
+      const locale = lang === 'en' ? 'en_US' : 'ru_RU';
+      this.#seo.set({
+        title: this.#translate.instant('createCard.title'),
+        description: this.#translate.instant('createCard.intro.p'),
+        locale,
+      });
+    });
   }
 
   protected start(): void {
