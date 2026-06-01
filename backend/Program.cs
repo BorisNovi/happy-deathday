@@ -39,5 +39,6 @@ app.UseCors();
 app.UseRateLimiter();
 
 app.MapControllers();
+app.MapGet("/api/version", () => Environment.GetEnvironmentVariable("APP_VERSION") ?? "dev");
 
 app.Run();

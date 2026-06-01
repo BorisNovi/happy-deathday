@@ -10,6 +10,9 @@ RUN npm run build
 FROM node:22-alpine AS runtime
 WORKDIR /app
 
+ARG APP_VERSION=dev
+ENV APP_VERSION=$APP_VERSION
+
 COPY --from=build --chown=node /app/dist ./dist
 
 USER node

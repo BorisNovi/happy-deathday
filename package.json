@@ -7,12 +7,10 @@
     "dev:logs": "docker logs happy-deathday-postgres-1 --tail 50 -f",
     "dev:rebuild": "docker compose up -d --build",
 
-    "compose": "docker compose -f docker-compose.prod.yml up -d --build",
+    "compose": "docker compose -f docker-compose.prod.yml up -d",
     "compose:down": "docker compose -f docker-compose.prod.yml down",
     "compose:logs:back": "docker logs happy-deathday-backend-1 --tail 50 -f",
     "compose:logs:front": "docker logs happy-deathday-frontend-1 --tail 50 -f",
-    "compose:rebuild:back": "docker compose -f docker-compose.prod.yml up -d --build backend",
-    "compose:rebuild:front": "docker compose -f docker-compose.prod.yml up -d --build frontend",
 
     "back:start": "cd backend && dotnet run",
     "back:watch": "cd backend && dotnet watch",
