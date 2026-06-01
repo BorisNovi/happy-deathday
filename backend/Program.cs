@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using HappyDeathdayApi.Data;
 using HappyDeathdayApi.Extensions;
 using HappyDeathdayApi.Infrastructure;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,13 @@ builder.Services.AddRateLimiting();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
+
+app.UseForwardedHeaders();
 app.UseExceptionHandler();
 app.UseCors();
 app.UseRateLimiter();
