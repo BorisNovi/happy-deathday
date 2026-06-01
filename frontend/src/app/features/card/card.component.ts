@@ -2,8 +2,8 @@ import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CardApi, SeoService } from '@core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CardDisplayComponent } from '@shared';
 import { EMPTY, catchError, map, switchMap } from 'rxjs';
 
@@ -38,6 +38,7 @@ export class CardComponent {
   );
 
   protected readonly cardStyle = computed(() => this.card()?.style ?? null);
+  protected readonly cardLang = computed(() => this.card()?.lang ?? 'en');
 
   protected readonly birthDate = computed(() => {
     const c = this.card();

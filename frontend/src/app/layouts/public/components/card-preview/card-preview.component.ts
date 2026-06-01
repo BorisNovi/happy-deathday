@@ -50,7 +50,7 @@ export class CardPreviewComponent {
     const style = parsed['style'] as CardStyle | undefined;
 
     if (!name || !birthDate || !gender || !style || !Object.values(CardStyle).includes(style)) {
-      this.#router.navigate(['/public/create/form']);
+      this.#router.navigate(this.#langService.langPath('public', 'create', 'form'));
       return;
     }
 
@@ -73,12 +73,12 @@ export class CardPreviewComponent {
             style,
           });
         },
-        error: () => this.#router.navigate(['/public/create/form']),
+        error: () => this.#router.navigate(this.#langService.langPath('public', 'create', 'form')),
       });
   }
 
   protected goBack(): void {
-    this.#router.navigate(['/public/create/style'], { queryParamsHandling: 'preserve' });
+    this.#router.navigate(this.#langService.langPath('public', 'create', 'style'), { queryParamsHandling: 'preserve' });
   }
 
   protected submit(): void {
@@ -107,7 +107,7 @@ export class CardPreviewComponent {
 
   protected createAnother(): void {
     this.#state.clear();
-    this.#router.navigate(['/public']);
+    this.#router.navigate(this.#langService.langPath('public'));
   }
 
   protected copyLink(): void {

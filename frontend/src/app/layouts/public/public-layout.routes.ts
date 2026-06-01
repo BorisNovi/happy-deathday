@@ -23,21 +23,21 @@ export const publicLayoutRoutes: Routes = [
           },
           {
             path: 'form',
-            title: 'Создать открытку',
+            title: 'Happy Deathday - Create Card',
             resolve: { _translations: loadTranslations },
             loadComponent: () => import('./components').then(c => c.CreateFormComponent),
           },
           {
             path: 'style',
-            title: 'Выбор стиля',
+            title: 'Happy Deathday - Select Style',
             loadComponent: () => import('./components').then(c => c.CreateStyleComponent),
           },
+          {
+            path: 'card-preview',
+            title: 'Happy Deathday - Card Preview',
+            loadComponent: () => import('./components').then(c => c.CardPreviewComponent),
+          },
         ],
-      },
-      {
-        path: 'card-preview',
-        title: 'Предпросмотр открытки',
-        loadComponent: () => import('./components').then(c => c.CardPreviewComponent),
       },
     ],
   },

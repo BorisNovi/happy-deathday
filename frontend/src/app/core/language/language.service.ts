@@ -12,6 +12,7 @@ export class LanguageService {
 
   readonly availableLanguages = ['ru', 'en'];
   readonly #defaultLanguage = 'en';
+  readonly #localeMap: Record<string, string> = { en: 'en_US', ru: 'ru_RU' };
 
   readonly #currentLang = signal<string>(this.#getInitialLanguage());
 
@@ -35,6 +36,16 @@ export class LanguageService {
     this.#currentLang.set(value);
     this.#storage.setItem('language', value);
     this.#translate.use(value);
+  }
+
+  readonly currentLocale = computed(() => this.localeFor(this.#currentLang()));
+
+  localeFor(lang: string): string {
+    return this.#localeMap[lang] ?? lang;
+  }
+
+  langPath(...segments: string[]): string[] {
+    return [this.currentLang(), ...segments];
   }
 
   #getInitialLanguage(): string {

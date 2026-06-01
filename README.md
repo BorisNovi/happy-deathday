@@ -139,13 +139,13 @@ happy-deathday/
 
 ## Routing
 
-| Path                    | Component     | Render mode | Description               |
-|-------------------------|---------------|-------------|---------------------------|
-| `/public/create/intro`  | CreateIntro   | Prerender   | Landing page with CTA     |
-| `/public/create/form`   | CreateForm    | Prerender   | Name, birth date, gender, country |
-| `/public/create/style`  | CreateStyle   | Prerender   | Style picker              |
-| `/public/card-preview`  | CardPreview   | Client      | Review and submit         |
-| `/card/:id`             | Card          | Server      | Shareable card with timer |
+| Path                           | Component     | Render mode | Description                       |
+|--------------------------------|---------------|-------------|-----------------------------------|
+| `/public/create/intro`         | CreateIntro   | Prerender   | Landing page with CTA             |
+| `/public/create/form`          | CreateForm    | Prerender   | Name, birth date, gender, country |
+| `/public/create/style`         | CreateStyle   | Prerender   | Style picker                      |
+| `/public/create/card-preview`  | CardPreview   | Client      | Review and submit                 |
+| `/card/:id`                    | Card          | Server      | Shareable card with timer         |
 
 ---
 

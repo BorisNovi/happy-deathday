@@ -1,5 +1,7 @@
+import { DOCUMENT } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { LanguageService } from '../language/language.service';
 
 export interface SeoMeta {
   title: string;
@@ -23,6 +25,8 @@ const CARD_OG = {
 export class SeoService {
   readonly #meta = inject(Meta);
   readonly #title = inject(Title);
+  readonly #doc = inject(DOCUMENT);
+  readonly #lang = inject(LanguageService);
 
   set(data: SeoMeta): void {
     this.#title.setTitle(data.title);
@@ -39,14 +43,29 @@ export class SeoService {
       this.#meta.updateTag({ property: 'og:locale', content: data.locale });
   }
 
+  setHreflang(alternates: Array<{ hreflang: string; href: string }>): void {
+    this.#doc.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
+    alternates.forEach(({ hreflang, href }) => {
+      const link = this.#doc.createElement('link');
+      link.setAttribute('rel', 'alternate');
+      link.setAttribute('hreflang', hreflang);
+      link.setAttribute('href', href);
+      this.#doc.head.appendChild(link);
+    });
+  }
+
   setCardMeta(card: { recipientName: string; lang: string; id: string | number }, origin: string): void {
-    const lang = card.lang === 'en' ? 'en' : 'ru';
-    const texts = CARD_OG[lang];
+    const texts = CARD_OG[card.lang as keyof typeof CARD_OG] ?? CARD_OG.en;
+    const url = `${origin}/card/${card.id}`;
     this.set({
       title: texts.title(card.recipientName),
       description: texts.description,
-      url: `${origin}/card/${card.id}`,
-      locale: lang === 'en' ? 'en_US' : 'ru_RU',
+      url,
+      locale: this.#lang.localeFor(card.lang),
     });
+    this.setHreflang([
+      { hreflang: card.lang, href: url },
+      { hreflang: 'x-default', href: url },
+    ]);
   }
 }
