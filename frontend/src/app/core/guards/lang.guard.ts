@@ -1,5 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { catchError, map, of } from 'rxjs';
 import { LanguageService } from '../language/language.service';
 
 export const langGuard: CanActivateFn = route => {
@@ -10,8 +11,10 @@ export const langGuard: CanActivateFn = route => {
   if (!langService.availableLanguages.includes(lang))
     return router.createUrlTree([langService.currentLang(), 'public']);
 
-  langService.changeLanguage(lang);
-  return true;
+  return langService.loadLang(lang).pipe(
+    map(() => true),
+    catchError(() => of(true)),
+  );
 };
 
 export const defaultLangGuard: CanActivateFn = () => {

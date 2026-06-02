@@ -1,11 +1,11 @@
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CardApi, SeoService } from '@core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CardDisplayComponent } from '@shared';
-import { EMPTY, catchError, map, switchMap } from 'rxjs';
+import { EMPTY, catchError, map, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-card',
@@ -28,6 +28,7 @@ export class CardComponent {
       map(params => params.get('id')!),
       switchMap(id =>
         this.#cardApi.getById(id).pipe(
+          tap(card => this.#seo.setCardMeta(card, this.#doc.location.origin)),
           catchError(() => {
             this.error.set(this.#translate.instant('card.notFound'));
             return EMPTY;
@@ -49,13 +50,4 @@ export class CardComponent {
     const c = this.card();
     return c ? new Date(c.expectedDeathDate) : null;
   });
-
-  constructor() {
-    effect(() => {
-      const c = this.card();
-      if (!c)
-        return;
-      this.#seo.setCardMeta(c, this.#doc.location.origin);
-    });
-  }
 }

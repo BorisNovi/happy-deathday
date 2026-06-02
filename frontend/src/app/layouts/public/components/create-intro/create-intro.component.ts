@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { TuiButton, TuiIcon } from '@taiga-ui/core';
@@ -24,19 +24,17 @@ export class CreateIntroComponent {
     this.#state.clear();
     this.#router.navigate(this.#lang.langPath('public', 'create', 'intro'), { replaceUrl: true });
 
-    effect(() => {
-      this.#seo.set({
-        title: this.#translate.instant('createCard.title'),
-        description: this.#translate.instant('createCard.intro.p'),
-        locale: this.#lang.currentLocale(),
-      });
-      const origin = this.#doc.location.origin;
-      this.#seo.setHreflang([
-        { hreflang: 'en', href: `${origin}/en/public/create/intro` },
-        { hreflang: 'ru', href: `${origin}/ru/public/create/intro` },
-        { hreflang: 'x-default', href: `${origin}/en/public/create/intro` },
-      ]);
+    const origin = this.#doc.location.origin;
+    this.#seo.set({
+      title: this.#translate.instant('createCard.title'),
+      description: this.#translate.instant('createCard.intro.p'),
+      locale: this.#lang.currentLocale(),
     });
+    this.#seo.setHreflang([
+      { hreflang: 'en', href: `${origin}/en/public/create/intro` },
+      { hreflang: 'ru', href: `${origin}/ru/public/create/intro` },
+      { hreflang: 'x-default', href: `${origin}/en/public/create/intro` },
+    ]);
   }
 
   protected start(): void {

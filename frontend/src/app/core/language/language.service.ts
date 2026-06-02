@@ -1,7 +1,8 @@
 import { isPlatformBrowser } from '@angular/common';
 import { computed, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { InterpolatableTranslationObject, TranslateService } from '@ngx-translate/core';
 import { ILanguageOption } from '@shared';
+import { Observable } from 'rxjs';
 import { StorageService } from '../storage/storage.service';
 
 @Injectable({ providedIn: 'root' })
@@ -36,6 +37,12 @@ export class LanguageService {
     this.#currentLang.set(value);
     this.#storage.setItem('language', value);
     this.#translate.use(value);
+  }
+
+  loadLang(lang: string): Observable<InterpolatableTranslationObject> {
+    this.#currentLang.set(lang);
+    this.#storage.setItem('language', lang);
+    return this.#translate.use(lang);
   }
 
   readonly currentLocale = computed(() => this.localeFor(this.#currentLang()));
