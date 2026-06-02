@@ -95,18 +95,18 @@ jobs:
       - name: Copy configs to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          host: ${{ secrets.HD_VPS_HOST }}
+          username: ${{ secrets.HD_VPS_USER }}
+          key: ${{ secrets.HD_VPS_SSH_KEY }}
           source: "docker-compose.prod.yml,nginx/"
           target: /opt/happy-deathday
 
       - name: Pull and restart
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          host: ${{ secrets.HD_VPS_HOST }}
+          username: ${{ secrets.HD_VPS_USER }}
+          key: ${{ secrets.HD_VPS_SSH_KEY }}
           script: |
             TAG=${{ github.event.inputs.tag || 'latest' }}
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
