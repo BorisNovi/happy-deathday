@@ -30,6 +30,7 @@ services:
     image: ghcr.io/borisnovi/happy-deathday-frontend:latest
     environment:
       PORT: 4200
+      SSR_API_BASE: http://backend:8080
     restart: unless-stopped
 
   nginx:
