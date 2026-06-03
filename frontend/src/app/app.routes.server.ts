@@ -9,8 +9,7 @@ export const serverRoutes: ServerRoute[] = [
   },
   {
     path: ':lang/public/create/intro',
-    renderMode: RenderMode.Prerender,
-    getPrerenderParams: async () => LANGS,
+    renderMode: RenderMode.Server,
   },
   {
     path: ':lang/public/create/form',
