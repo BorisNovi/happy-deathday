@@ -1,7 +1,6 @@
 import { HttpInterceptorFn, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import {
   ApplicationConfig,
-  importProvidersFrom,
   inject,
   InjectionToken,
   provideBrowserGlobalErrorListeners,
@@ -10,7 +9,7 @@ import {
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { errorInterceptor, TransferStateLoader } from '@core';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { provideTranslateLoader, provideTranslateService } from '@ngx-translate/core';
 import { provideTaiga } from '@taiga-ui/core';
 import { routes } from './app.routes';
 
@@ -32,14 +31,9 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideHttpClient(withInterceptors([errorInterceptor, ssrApiInterceptor]), withFetch()),
     provideTaiga(),
-    importProvidersFrom(
-      TranslateModule.forRoot({
-        fallbackLang: 'ru',
-        loader: {
-          provide: TranslateLoader,
-          useClass: TransferStateLoader,
-        },
-      }),
-    ),
+    provideTranslateService({
+      fallbackLang: 'en',
+      loader: provideTranslateLoader(TransferStateLoader),
+    }),
   ],
 };
