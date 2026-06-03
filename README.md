@@ -2,6 +2,8 @@
 
 A shareable birthday card that counts down to the recipient's estimated death date instead of celebrating another year survived. Built as a dark-humour take on the traditional e-card.
 
+**Live:** [happydeathday.app](https://happydeathday.app/)
+
 ---
 
 ## How it works
@@ -24,7 +26,8 @@ A shareable birthday card that counts down to the recipient's estimated death da
 - **OG meta tags** — language-aware Open Graph tags for card sharing in messengers and social networks (SSR-rendered)
 - **Dark / light theme** — persisted in `localStorage`
 - **Multilingual** — Russian and English, persisted in `localStorage`
-- **SSR + Prerender** — card pages are server-rendered per request; creation flow pages are pre-rendered at build time
+- **SSR** — card and creation flow pages are server-rendered per request; style and preview pages are client-rendered
+- **Mobile-friendly date picker** — native bottom-sheet calendar on mobile devices
 - **Auto-expiry** — a background service deletes expired cards every hour
 
 ---
@@ -34,7 +37,7 @@ A shareable birthday card that counts down to the recipient's estimated death da
 | Layer     | Technology                                     |
 |-----------|------------------------------------------------|
 | Frontend  | Angular 21 · Taiga UI v5 · ngx-translate v17  |
-| Rendering | Angular SSR — Server per request (`/card/:id`) · Prerender at build (`/public/**`) |
+| Rendering | Angular SSR — Server per request (`/card/:id`, `/public/create/intro`, `/public/create/form`) · Client (`/public/create/style`, `/public/create/card-preview`) |
 | Backend   | ASP.NET Core · .NET 10 · Entity Framework Core |
 | Database  | PostgreSQL 17                                  |
 
@@ -141,9 +144,9 @@ happy-deathday/
 
 | Path                           | Component     | Render mode | Description                       |
 |--------------------------------|---------------|-------------|-----------------------------------|
-| `/public/create/intro`         | CreateIntro   | Prerender   | Landing page with CTA             |
-| `/public/create/form`          | CreateForm    | Prerender   | Name, birth date, gender, country |
-| `/public/create/style`         | CreateStyle   | Prerender   | Style picker                      |
+| `/public/create/intro`         | CreateIntro   | Server      | Landing page with CTA             |
+| `/public/create/form`          | CreateForm    | Server      | Name, birth date, gender, country |
+| `/public/create/style`         | CreateStyle   | Client      | Style picker                      |
 | `/public/create/card-preview`  | CardPreview   | Client      | Review and submit                 |
 | `/card/:id`                    | Card          | Server      | Shareable card with timer         |
 
@@ -158,3 +161,9 @@ happy-deathday/
 | `GET`  | `/api/card/:id`     | Fetch a card by ID                               |
 
 Cards include an `expiresAt` timestamp. Expired cards are deleted automatically.
+
+---
+
+## License
+
+[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — free to use and adapt for non-commercial purposes with attribution. Commercial use is prohibited.
