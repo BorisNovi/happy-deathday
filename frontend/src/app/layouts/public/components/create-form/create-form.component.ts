@@ -5,16 +5,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CardStateService, LanguageService, QueryParamsService } from '@core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Country } from '@shared';
+import { TuiMobileCalendarDropdown } from '@taiga-ui/addon-mobile';
 import { TuiDay } from '@taiga-ui/cdk';
 import { TuiButton, TuiDataList, TuiError, TuiGroup, TuiIcon, TuiInput, TuiRadio } from '@taiga-ui/core';
 import { TUI_ITEMS_HANDLERS } from '@taiga-ui/core/directives/items-handlers';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/core/tokens';
-import { TuiBlock, TuiComboBox, TuiInputDate, TuiTooltip } from '@taiga-ui/kit';
+import { TuiBlock, TuiInputDate, TuiSelect, TuiTooltip } from '@taiga-ui/kit';
 import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-create-form',
-  imports: [ReactiveFormsModule, TuiInput, TuiInputDate, TuiButton, TuiError, TuiGroup, TuiBlock, TuiRadio, TuiIcon, TuiComboBox, TuiDataList, TuiTooltip, TranslatePipe],
+  imports: [ReactiveFormsModule, TuiInput, TuiInputDate, TuiButton, TuiError, TuiGroup, TuiBlock, TuiRadio, TuiIcon, ...TuiSelect, TuiDataList, TuiTooltip, TuiMobileCalendarDropdown, TranslatePipe],
   templateUrl: './create-form.component.html',
   styleUrl: './create-form.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,

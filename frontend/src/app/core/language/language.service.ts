@@ -2,6 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { computed, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { InterpolatableTranslationObject, TranslateService } from '@ngx-translate/core';
 import { ILanguageOption } from '@shared';
+import { TuiLanguageSwitcherService } from '@taiga-ui/i18n';
 import { Observable } from 'rxjs';
 import { StorageService } from '../storage/storage.service';
 
@@ -10,6 +11,7 @@ export class LanguageService {
   readonly #translate = inject(TranslateService);
   readonly #storage = inject(StorageService);
   readonly #isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  readonly #tuiLang = inject(TuiLanguageSwitcherService);
 
   readonly availableLanguages = ['ru', 'en'];
   readonly #defaultLanguage = 'en';
@@ -31,18 +33,25 @@ export class LanguageService {
   constructor() {
     this.#translate.addLangs(this.availableLanguages);
     this.#translate.use(this.#currentLang());
+    this.#tuiLang.setLanguage(this.#toTuiLang(this.#currentLang()));
   }
 
   changeLanguage(value: string): void {
     this.#currentLang.set(value);
     this.#storage.setItem('language', value);
     this.#translate.use(value);
+    this.#tuiLang.setLanguage(this.#toTuiLang(value));
   }
 
   loadLang(lang: string): Observable<InterpolatableTranslationObject> {
     this.#currentLang.set(lang);
     this.#storage.setItem('language', lang);
+    this.#tuiLang.setLanguage(this.#toTuiLang(lang));
     return this.#translate.use(lang);
+  }
+
+  #toTuiLang(lang: string): 'russian' | 'english' {
+    return lang === 'ru' ? 'russian' : 'english';
   }
 
   readonly currentLocale = computed(() => this.localeFor(this.#currentLang()));

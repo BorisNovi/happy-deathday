@@ -11,6 +11,7 @@ import { provideRouter } from '@angular/router';
 import { errorInterceptor, TransferStateLoader } from '@core';
 import { provideTranslateLoader, provideTranslateService } from '@ngx-translate/core';
 import { provideTaiga } from '@taiga-ui/core';
+import { tuiLanguageSwitcher } from '@taiga-ui/i18n';
 import { routes } from './app.routes';
 
 export const SSR_API_BASE = new InjectionToken<string>('SSR_API_BASE', { factory: () => '' });
@@ -31,6 +32,11 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideHttpClient(withInterceptors([errorInterceptor, ssrApiInterceptor]), withFetch()),
     provideTaiga(),
+    tuiLanguageSwitcher(language => {
+      if (language === 'russian')
+        return import('@taiga-ui/i18n/languages/russian');
+      return import('@taiga-ui/i18n/languages/english');
+    }),
     provideTranslateService({
       fallbackLang: 'en',
       loader: provideTranslateLoader(TransferStateLoader),
