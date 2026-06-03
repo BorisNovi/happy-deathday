@@ -31,6 +31,7 @@ services:
     environment:
       PORT: 4200
       SSR_API_BASE: http://backend:8080
+      NG_ALLOWED_HOSTS: happydeathday.app,www.happydeathday.app
     restart: unless-stopped
 
   nginx:
