@@ -1,28 +1,20 @@
 import { ApplicationConfig, mergeApplicationConfig } from '@angular/core';
 import { provideServerRendering, withRoutes } from '@angular/ssr';
+import { SSR_API_BASE } from '@core';
 import { WA_NAVIGATOR, WA_WINDOW } from '@ng-web-apis/common';
 import { provideTranslateLoader } from '@ngx-translate/core';
-import { SSR_API_BASE, appConfig } from './app.config';
+import { appConfig } from './app.config';
 import { serverRoutes } from './app.routes.server';
 import { TranslateServerLoader } from './core/language/translate-server.loader';
 
 const ssrWindow = {
   matchMedia: () => ({
-    // matches: false,
-    // media: '',
-    // onchange: null,
-    // addListener: () => {},
-    // removeListener: () => {},
     addEventListener: () => {},
     removeEventListener: () => {},
-    // dispatchEvent: () => false,
   }),
   addEventListener: () => {},
   removeEventListener: () => {},
   dispatchEvent: () => false,
-  // localStorage: null,
-  // innerWidth: 0,
-  // innerHeight: 0,
   document: {
     documentElement: { clientWidth: 0, clientHeight: 0 },
   },

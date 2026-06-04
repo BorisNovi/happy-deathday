@@ -11,16 +11,16 @@ export const publicLayoutRoutes: Routes = [
     path: '',
     component: PublicLayoutComponent,
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'create' },
+      {
+        path: '',
+        pathMatch: 'full',
+        title: 'Happy Deathday',
+        loadComponent: () => import('./components').then(c => c.CreateIntroComponent),
+      },
       {
         path: 'create',
         children: [
-          // { path: '', pathMatch: 'full', redirectTo: 'intro' },
-          {
-            path: '',
-            title: 'Happy Deathday',
-            loadComponent: () => import('./components').then(c => c.CreateIntroComponent),
-          },
+          { path: '', pathMatch: 'full', redirectTo: 'form' },
           {
             path: 'form',
             title: 'Happy Deathday - Create Card',

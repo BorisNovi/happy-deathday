@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LanguageService } from '@core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TuiButton } from '@taiga-ui/core';
 
@@ -17,12 +16,10 @@ import { TuiButton } from '@taiga-ui/core';
         {{ 'notFound.message1' | translate }}<br />
         {{ 'notFound.message2' | translate }}
       </p>
-      <a tuiButton [routerLink]="['/', lang()]" size="m" appearance="outline">
+      <a tuiButton [routerLink]="'/'" size="m" appearance="outline">
         {{ 'notFound.back' | translate }}
       </a>
     </main>
   `,
 })
-export class NotFoundComponent {
-  protected readonly lang = inject(LanguageService).currentLang;
-}
+export class NotFoundComponent {}

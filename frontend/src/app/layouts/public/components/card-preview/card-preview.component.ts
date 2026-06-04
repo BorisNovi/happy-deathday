@@ -107,7 +107,7 @@ export class CardPreviewComponent {
 
   protected createAnother(): void {
     this.#state.clear();
-    this.#router.navigate(this.#langService.langPath());
+    this.#router.navigate(['/']);
   }
 
   protected copyLink(): void {

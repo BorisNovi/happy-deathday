@@ -8,7 +8,7 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Server,
   },
   {
-    path: ':lang/create',
+    path: ':lang',
     renderMode: RenderMode.Server,
   },
   {

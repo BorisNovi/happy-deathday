@@ -1,9 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { CardStateService, LanguageService, SeoService } from '@core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { TuiButton, TuiIcon } from '@taiga-ui/core';
-import { CardStateService, LanguageService, SeoService } from '@core';
 
 @Component({
   selector: 'app-create-intro',
@@ -22,7 +22,6 @@ export class CreateIntroComponent {
 
   constructor() {
     this.#state.clear();
-    this.#router.navigate(this.#lang.langPath('create'), { replaceUrl: true });
 
     const origin = this.#doc.location.origin;
     this.#seo.set({
@@ -31,9 +30,9 @@ export class CreateIntroComponent {
       locale: this.#lang.currentLocale(),
     });
     this.#seo.setHreflang([
-      { hreflang: 'en', href: `${origin}/en/create` },
-      { hreflang: 'ru', href: `${origin}/ru/create` },
-      { hreflang: 'x-default', href: `${origin}/en/create` },
+      { hreflang: 'en', href: `${origin}/en` },
+      { hreflang: 'ru', href: `${origin}/ru` },
+      { hreflang: 'x-default', href: `${origin}/en` },
     ]);
   }
 
