@@ -115,4 +115,5 @@ jobs:
             sed -i "s|ghcr.io/borisnovi/happy-deathday-backend:.*|ghcr.io/borisnovi/happy-deathday-backend:$TAG|" /opt/happy-deathday/docker-compose.prod.yml
             sed -i "s|ghcr.io/borisnovi/happy-deathday-frontend:.*|ghcr.io/borisnovi/happy-deathday-frontend:$TAG|" /opt/happy-deathday/docker-compose.prod.yml
             docker compose -f /opt/happy-deathday/docker-compose.prod.yml up -d --remove-orphans
+            docker compose -f /opt/happy-deathday/docker-compose.prod.yml restart nginx
             docker image prune -f
