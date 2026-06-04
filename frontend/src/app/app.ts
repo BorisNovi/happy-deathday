@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { MetrikaService } from '@core';
 import { TuiRoot } from '@taiga-ui/core';
 
 @Component({
@@ -8,4 +9,8 @@ import { TuiRoot } from '@taiga-ui/core';
   templateUrl: './app.html',
   styleUrl: './app.less',
 })
-export class App {}
+export class App {
+  constructor() {
+    inject(MetrikaService);
+  }
+}
