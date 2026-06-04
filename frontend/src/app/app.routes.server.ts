@@ -8,16 +8,16 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Server,
   },
   {
-    path: ':lang/public/create/intro',
+    path: ':lang/create',
     renderMode: RenderMode.Server,
   },
   {
-    path: ':lang/public/create/form',
+    path: ':lang/create/form',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: async () => LANGS,
   },
   {
-    path: ':lang/public/create/style',
+    path: ':lang/create/style',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: async () => LANGS,
   },

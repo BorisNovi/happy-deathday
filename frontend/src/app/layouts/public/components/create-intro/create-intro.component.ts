@@ -22,7 +22,7 @@ export class CreateIntroComponent {
 
   constructor() {
     this.#state.clear();
-    this.#router.navigate(this.#lang.langPath('public', 'create', 'intro'), { replaceUrl: true });
+    this.#router.navigate(this.#lang.langPath('create'), { replaceUrl: true });
 
     const origin = this.#doc.location.origin;
     this.#seo.set({
@@ -31,13 +31,13 @@ export class CreateIntroComponent {
       locale: this.#lang.currentLocale(),
     });
     this.#seo.setHreflang([
-      { hreflang: 'en', href: `${origin}/en/public/create/intro` },
-      { hreflang: 'ru', href: `${origin}/ru/public/create/intro` },
-      { hreflang: 'x-default', href: `${origin}/en/public/create/intro` },
+      { hreflang: 'en', href: `${origin}/en/create` },
+      { hreflang: 'ru', href: `${origin}/ru/create` },
+      { hreflang: 'x-default', href: `${origin}/en/create` },
     ]);
   }
 
   protected start(): void {
-    this.#router.navigate(this.#lang.langPath('public', 'create', 'form'));
+    this.#router.navigate(this.#lang.langPath('create', 'form'));
   }
 }

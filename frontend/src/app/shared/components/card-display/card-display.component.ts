@@ -12,7 +12,7 @@ import { LanguageService } from '@core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CardStyle, Country } from '@shared';
 
-const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'] as const;
+const ROMAN = ['N', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'] as const;
 
 @Component({
   selector: 'app-card-display',
@@ -66,12 +66,6 @@ export class CardDisplayComponent {
   protected toRoman(n: number): string {
     return ROMAN[n] ?? String(n);
   }
-
-
-  // protected readonly birthDateFormatted = computed<string>(() => {
-  //   const d = this.birthDate();
-  //   return `${d.getDate()} · ${ROMAN[d.getMonth()]} · ${d.getFullYear()}`;
-  // });
 
   protected readonly deathDateLabel = computed<string>(() => {
     const d = this.deathDate();

@@ -69,7 +69,7 @@ export class CreateStyleComponent {
             gender,
             style: this.selectedStyle(),
           });
-          this.#router.navigate(this.#langService.langPath('public', 'create', 'card-preview'), { queryParamsHandling: 'preserve' });
+          this.#router.navigate(this.#langService.langPath('create', 'card-preview'), { queryParamsHandling: 'preserve' });
         },
       });
   }

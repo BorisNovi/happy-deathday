@@ -105,6 +105,6 @@ export class CreateFormComponent {
   }
 
   protected back(): void {
-    this.#router.navigate(['../intro'], { relativeTo: this.#route });
+    this.#router.navigate(['../'], { relativeTo: this.#route });
   }
 }

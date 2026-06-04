@@ -17,7 +17,7 @@ import { TuiButton } from '@taiga-ui/core';
         {{ 'notFound.message1' | translate }}<br />
         {{ 'notFound.message2' | translate }}
       </p>
-      <a tuiButton [routerLink]="['/', lang(), 'public']" size="m" appearance="outline">
+      <a tuiButton [routerLink]="['/', lang()]" size="m" appearance="outline">
         {{ 'notFound.back' | translate }}
       </a>
     </main>

@@ -15,9 +15,9 @@ export const publicLayoutRoutes: Routes = [
       {
         path: 'create',
         children: [
-          { path: '', pathMatch: 'full', redirectTo: 'intro' },
+          // { path: '', pathMatch: 'full', redirectTo: 'intro' },
           {
-            path: 'intro',
+            path: '',
             title: 'Happy Deathday',
             loadComponent: () => import('./components').then(c => c.CreateIntroComponent),
           },

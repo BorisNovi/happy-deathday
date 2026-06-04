@@ -17,14 +17,9 @@ export const routes: Routes = [
     canActivate: [langGuard],
     children: [
       {
-        path: 'public',
-        loadChildren: () => import('./layouts').then(c => c.publicLayoutRoutes),
-      },
-      {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'public',
-      },
+        loadChildren: () => import('./layouts').then(c => c.publicLayoutRoutes),
+      }
     ],
   },
   {

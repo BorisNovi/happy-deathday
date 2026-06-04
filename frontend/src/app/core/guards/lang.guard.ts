@@ -9,7 +9,7 @@ export const langGuard: CanActivateFn = route => {
   const router = inject(Router);
 
   if (!langService.availableLanguages.includes(lang))
-    return router.createUrlTree([langService.currentLang(), 'public']);
+    return router.createUrlTree([langService.currentLang()]);
 
   return langService.loadLang(lang).pipe(
     map(() => true),
@@ -19,5 +19,5 @@ export const langGuard: CanActivateFn = route => {
 
 export const defaultLangGuard: CanActivateFn = () => {
   const lang = inject(LanguageService).currentLang();
-  return inject(Router).createUrlTree([lang, 'public']);
+  return inject(Router).createUrlTree([lang]);
 };
