@@ -12,7 +12,7 @@ import { LanguageService } from '@core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CardStyle, Country } from '@shared';
 
-const ROMAN = ['N', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'] as const;
+const ROMAN = ['0', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'] as const;
 
 @Component({
   selector: 'app-card-display',
@@ -91,11 +91,18 @@ export class CardDisplayComponent {
     };
   });
 
+  protected readonly isOvertime = computed<boolean>(() => {
+    const now = this.#now();
+    return !!now && now > this.deathDate();
+  });
+
   protected readonly countdown = computed<Record<'days' | 'hours' | 'mins' | 'secs', number>>(() => {
     const now = this.#now();
     if (!now)
       return { days: 0, hours: 0, mins: 0, secs: 0 };
-    const diff = Math.max(0, this.deathDate().getTime() - now.getTime());
+    const diff = this.isOvertime()
+      ? now.getTime() - this.deathDate().getTime()
+      : this.deathDate().getTime() - now.getTime();
     const totalSec = Math.floor(diff / 1000);
     return {
       days: Math.floor(totalSec / 86_400),
@@ -138,9 +145,15 @@ export class CardDisplayComponent {
   protected readonly message = computed<string>(() => {
     this.currentLang();
     const p = this.progress();
+    if (p < 15) return this.#translate.instant('card.message.dawn');
     if (p < 25) return this.#translate.instant('card.message.early');
-    if (p < 50) return this.#translate.instant('card.message.quarter');
-    if (p < 75) return this.#translate.instant('card.message.half');
-    return this.#translate.instant('card.message.late');
+    if (p < 33) return this.#translate.instant('card.message.beforeThird');
+    if (p < 38) return this.#translate.instant('card.message.third');
+    if (p < 50) return this.#translate.instant('card.message.beforeHalf');
+    if (p < 65) return this.#translate.instant('card.message.half');
+    if (p < 75) return this.#translate.instant('card.message.turning');
+    if (p < 87) return this.#translate.instant('card.message.beforeLate');
+    if (p < 100) return this.#translate.instant('card.message.late');
+    return this.#translate.instant('card.message.final');
   });
 }

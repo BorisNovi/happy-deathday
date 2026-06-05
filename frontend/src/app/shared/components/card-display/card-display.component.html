@@ -16,28 +16,35 @@
 
   <p class="card__message">{{ message() }}</p>
 
-  <p class="card__countdown-label">{{ 'card.countdown.label' | translate }} {{ deathDateLabel() }}</p>
+  <p class="card__countdown-label">
+    {{ (isOvertime() ? 'card.countdown.overtimeLabel' : 'card.countdown.label') | translate }} {{ deathDateLabel() }}
+  </p>
 
   <div class="card__countdown" role="timer" [attr.aria-label]="'card.countdown.ariaLabel' | translate">
-    <div class="card__unit">
-      <span class="card__num">{{ daysDisplay() }}</span>
-      <span class="card__unit-label">{{ 'card.countdown.days' | translate }}</span>
+    <div class="card__countdown-units">
+      <div class="card__unit">
+        <span class="card__num">{{ daysDisplay() }}</span>
+        <span class="card__unit-label">{{ 'card.countdown.days' | translate }}</span>
+      </div>
+      <span class="card__sep" aria-hidden="true">:</span>
+      <div class="card__unit">
+        <span class="card__num">{{ hoursDisplay() }}</span>
+        <span class="card__unit-label">{{ 'card.countdown.hours' | translate }}</span>
+      </div>
+      <span class="card__sep" aria-hidden="true">:</span>
+      <div class="card__unit">
+        <span class="card__num">{{ minsDisplay() }}</span>
+        <span class="card__unit-label">{{ 'card.countdown.minutes' | translate }}</span>
+      </div>
+      <span class="card__sep" aria-hidden="true">:</span>
+      <div class="card__unit">
+        <span class="card__num" [class.card__num--flash]="flash()">{{ secsDisplay() }}</span>
+        <span class="card__unit-label">{{ 'card.countdown.seconds' | translate }}</span>
+      </div>
     </div>
-    <span class="card__sep" aria-hidden="true">:</span>
-    <div class="card__unit">
-      <span class="card__num">{{ hoursDisplay() }}</span>
-      <span class="card__unit-label">{{ 'card.countdown.hours' | translate }}</span>
-    </div>
-    <span class="card__sep" aria-hidden="true">:</span>
-    <div class="card__unit">
-      <span class="card__num">{{ minsDisplay() }}</span>
-      <span class="card__unit-label">{{ 'card.countdown.minutes' | translate }}</span>
-    </div>
-    <span class="card__sep" aria-hidden="true">:</span>
-    <div class="card__unit">
-      <span class="card__num" [class.card__num--flash]="flash()">{{ secsDisplay() }}</span>
-      <span class="card__unit-label">{{ 'card.countdown.seconds' | translate }}</span>
-    </div>
+    @if (isOvertime()) {
+      <p class="card__overtime-note">{{ 'card.countdown.overtimeNote' | translate }}</p>
+    }
   </div>
 
   <div

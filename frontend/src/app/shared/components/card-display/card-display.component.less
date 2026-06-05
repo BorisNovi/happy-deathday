@@ -208,14 +208,21 @@
 
   &__countdown {
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 0.5rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
     margin-bottom: 1.5rem;
     padding: 1.25rem 1.5rem;
     background: var(--card-countdown-bg);
     box-shadow: var(--card-countdown-shadow);
     border-radius: 0.75rem;
+
+    .card__countdown-units {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
 
     .card__unit {
       display: flex;
@@ -256,6 +263,22 @@
       align-self: baseline;
       font-weight: 300;
     }
+
+    .card__overtime-note {
+      flex-basis: 100%;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      color: var(--card-countdown-unit-label);
+      text-transform: uppercase;
+      margin-top: 0.75rem;
+    }
+  }
+
+  &__countdown:has(.card__overtime-note) {
+    gap: .5rem;
+    padding-bottom: 1rem !important;
   }
 
   &__progress {

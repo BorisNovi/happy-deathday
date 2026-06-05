@@ -99,6 +99,8 @@
     "countdown": {
       "ariaLabel": "Countdown to end of life",
       "label": "Time left until",
+      "overtimeLabel": "Extra time since",
+      "overtimeNote": "The clock didn't stop. It just changed direction.",
       "days": "days",
       "hours": "hours",
       "minutes": "minutes",
@@ -109,10 +111,16 @@
       "stats": "Lived {{percent}}% · expected lifespan {{expectancy}} (WHO, 2024)"
     },
     "message": {
-      "early": "Most of the journey is still ahead. The perfect time to start thinking about what matters.",
-      "quarter": "A quarter of your allotted time is officially behind you. A great excuse to drink something nice.",
+      "dawn": "You've barely started. Statistically, this is about as good as your health will get. Enjoy it while it's still embarrassing to mention your age.",
+      "early": "The numbers are still on your side. Make the most of it — it won't last forever.",
+      "beforeThird": "Most of the journey is still ahead. The perfect time to start thinking about what matters.",
+      "third": "The first third is behind you. Everything is functioning normally — apart from a few new sounds when getting off the couch.",
+      "beforeHalf": "Almost halfway there. A great excuse to drink something nice.",
       "half": "More than half of your allotted time is officially gone. The final act is not far off.",
-      "late": "The final act. Spending time well is the only way to beat it."
+      "turning": "You're now in the second half of your second half. This is where 'you look young for your age' becomes a genuine compliment.",
+      "beforeLate": "Most of it is already behind you. Good news: the experience you've gained is real. Bad news: there's less and less time to put it to use.",
+      "late": "The final act. Spending time well is the only way to beat it.",
+      "final": "Statistically, you're in overtime. Most didn't get this far. It's either impressive or inconvenient for your heirs. Possibly both."
     }
   },
   "country": {
