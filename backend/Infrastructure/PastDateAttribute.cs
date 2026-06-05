@@ -11,7 +11,7 @@ public class PastDateAttribute : ValidationAttribute
             return true;
 
         if (value is DateOnly date)
-            return date < DateOnly.FromDateTime(DateTime.UtcNow);
+            return date < DateOnly.FromDateTime(DateTime.UtcNow).AddDays(1);
 
         return false;
     }
