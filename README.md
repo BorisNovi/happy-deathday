@@ -21,12 +21,13 @@ A shareable birthday card that counts down to the recipient's estimated death da
 
 - **4-step creation wizard** — intro → form → style → preview, state persisted in URL query params so a page refresh never loses progress
 - **4 card styles** — Standard, Official (typewriter + CRT countdown), Vintage (parchment + Playfair italic), Elegant (Arctika Script cursive)
-- **Life countdown** — real-time timer ticking down to the estimated death date
+- **Life countdown** — real-time timer ticking down to the estimated death date; counts forward with an overtime note if the person has outlived their estimate
+- **10 message stages** — contextual dark-humour message that evolves as the life progress bar fills
 - **WHO-based estimation** — life expectancy by country and gender (WHO 2024 data)
 - **OG meta tags** — language-aware Open Graph tags for card sharing in messengers and social networks (SSR-rendered)
 - **Dark / light theme** — persisted in `localStorage`
 - **Multilingual** — Russian and English, persisted in `localStorage`
-- **SSR** — card and creation flow pages are server-rendered per request; style and preview pages are client-rendered
+- **SSR** — card and intro pages are server-rendered per request; style and preview pages are client-rendered
 - **Mobile-friendly date picker** — native bottom-sheet calendar on mobile devices
 - **Auto-expiry** — a background service deletes expired cards every hour
 
@@ -37,7 +38,7 @@ A shareable birthday card that counts down to the recipient's estimated death da
 | Layer     | Technology                                     |
 |-----------|------------------------------------------------|
 | Frontend  | Angular 21 · Taiga UI v5 · ngx-translate v17  |
-| Rendering | Angular SSR — Server per request (`/card/:id`, `/public/create/intro`, `/public/create/form`) · Client (`/public/create/style`, `/public/create/card-preview`) |
+| Rendering | Angular SSR — Server per request (`/card/:id`, `/:lang`, `/:lang/create/form`) · Prerender (`/:lang/create/style`) · Client (`/:lang/create/card-preview`) |
 | Backend   | ASP.NET Core · .NET 10 · Entity Framework Core |
 | Database  | PostgreSQL 17                                  |
 
@@ -117,7 +118,10 @@ happy-deathday/
 │   └── src/app/
 │       ├── core/               # singleton services
 │       │   ├── card/           # CardApi, CardStateService
+│       │   ├── guards/         # langGuard, defaultLangGuard
+│       │   ├── interceptors/   # ssrApiInterceptor, errorInterceptor
 │       │   ├── language/       # LanguageService, TransferState loader
+│       │   ├── metrika/        # MetrikaService (Yandex Metrika SPA tracking)
 │       │   ├── seo/            # SeoService (meta tags)
 │       │   └── storage/        # StorageService, QueryParamsService
 │       ├── features/           # routed pages (card display, 404)
@@ -142,13 +146,13 @@ happy-deathday/
 
 ## Routing
 
-| Path                           | Component     | Render mode | Description                       |
-|--------------------------------|---------------|-------------|-----------------------------------|
-| `/public/create/intro`         | CreateIntro   | Server      | Landing page with CTA             |
-| `/public/create/form`          | CreateForm    | Server      | Name, birth date, gender, country |
-| `/public/create/style`         | CreateStyle   | Client      | Style picker                      |
-| `/public/create/card-preview`  | CardPreview   | Client      | Review and submit                 |
-| `/card/:id`                    | Card          | Server      | Shareable card with timer         |
+| Path                    | Component     | Render mode | Description                       |
+|-------------------------|---------------|-------------|-----------------------------------|
+| `/:lang`                | CreateIntro   | Server      | Landing page with CTA             |
+| `/:lang/create/form`    | CreateForm    | Server      | Name, birth date, gender, country |
+| `/:lang/create/style`   | CreateStyle   | Prerender   | Style picker                      |
+| `/:lang/create/card-preview` | CardPreview | Client   | Review and submit                 |
+| `/card/:id`             | Card          | Server      | Shareable card with timer         |
 
 ---
 
