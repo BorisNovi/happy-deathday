@@ -36,9 +36,11 @@ export class CardPreviewComponent {
   protected readonly createdCardId = signal<string | null>(null);
 
   constructor() {
-    if (!this.#state.formData()) {
+    const parsed = this.#queryParams.parseQueryParams(this.#route.snapshot.queryParams);
+    if (parsed['cardId'])
+      this.createdCardId.set(String(parsed['cardId']));
+    if (!this.#state.formData())
       this.#tryRestoreFromQueryParams();
-    }
   }
 
   #tryRestoreFromQueryParams(): void {
@@ -101,7 +103,11 @@ export class CardPreviewComponent {
         finalize(() => this.loading.set(false)),
       )
       .subscribe({
-        next: card =>this.createdCardId.set(String(card.id)),
+        next: card => {
+          const id = String(card.id);
+          this.createdCardId.set(id);
+          this.#queryParams.updateQueryParams({ cardId: id }, undefined, true);
+        },
       });
   }
 
