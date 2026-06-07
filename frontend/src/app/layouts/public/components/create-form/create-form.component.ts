@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CardStateService, LanguageService, QueryParamsService } from '@core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Country } from '@shared';
-import { TuiMobileCalendarDropdown } from '@taiga-ui/addon-mobile';
+import { TuiDropdownSheet, TuiMobileCalendarDropdown } from '@taiga-ui/addon-mobile';
 import { TuiDay } from '@taiga-ui/cdk';
 import { TuiButton, TuiDataList, TuiError, TuiGroup, TuiIcon, TuiInput, TuiRadio } from '@taiga-ui/core';
 import { TUI_ITEMS_HANDLERS } from '@taiga-ui/core/directives/items-handlers';
@@ -15,7 +15,7 @@ import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-create-form',
-  imports: [ReactiveFormsModule, TuiInput, TuiInputDate, TuiButton, TuiError, TuiGroup, TuiBlock, TuiRadio, TuiIcon, ...TuiSelect, TuiDataList, TuiTooltip, TuiMobileCalendarDropdown, TranslatePipe],
+  imports: [ReactiveFormsModule, TuiInput, TuiInputDate, TuiButton, TuiError, TuiGroup, TuiBlock, TuiRadio, TuiIcon, TuiSelect, TuiDataList, TuiTooltip, TuiDropdownSheet, TuiMobileCalendarDropdown, TranslatePipe],
   templateUrl: './create-form.component.html',
   styleUrl: './create-form.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -53,7 +53,13 @@ export class CreateFormComponent {
   readonly #state = inject(CardStateService);
 
   protected readonly maxDate = TuiDay.currentLocal();
-  protected readonly countries = Object.values(Country);
+  protected readonly countryGroups: { label: string | null; codes: Country[] }[] = [
+    { label: null, codes: [Country.WW] },
+    { label: 'createCard.form.country.group.cis', codes: [Country.RU, Country.UA, Country.BY, Country.KZ, Country.UZ, Country.GE, Country.AM, Country.IL] },
+    { label: 'createCard.form.country.group.english', codes: [Country.US, Country.GB, Country.CA, Country.AU] },
+    { label: 'createCard.form.country.group.europe', codes: [Country.DE, Country.FR, Country.PL, Country.ES, Country.IT, Country.NL, Country.RS] },
+    { label: 'createCard.form.country.group.asia', codes: [Country.CN, Country.JP, Country.KR, Country.SG, Country.VN, Country.TH, Country.MY, Country.ID, Country.PH, Country.IN] },
+  ];
 
   protected readonly form = this.#fb.group({
     recipientName: this.#fb.nonNullable.control('', [Validators.required, Validators.maxLength(30)]),

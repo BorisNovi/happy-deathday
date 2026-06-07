@@ -36,7 +36,13 @@
       "country": {
         "label": "Country of residence",
         "placeholder": "Select a country",
-        "hint": "Life expectancy varies by country. \"Whole world\" uses the global average."
+        "hint": "Life expectancy varies by country. \"Whole world\" uses the global average.",
+      "group": {
+        "cis": "Russian widely spoken",
+        "english": "English-speaking",
+        "europe": "Europe",
+        "asia": "Asia"
+      }
       },
       "gender": {
         "male": "Male",
@@ -143,7 +149,17 @@
     "es": "Spain",
     "it": "Italy",
     "nl": "Netherlands",
-    "rs": "Serbia"
+    "rs": "Serbia",
+    "cn": "China",
+    "jp": "Japan",
+    "kr": "South Korea",
+    "sg": "Singapore",
+    "vn": "Vietnam",
+    "th": "Thailand",
+    "my": "Malaysia",
+    "id": "Indonesia",
+    "ph": "Philippines",
+    "in": "India"
   },
   "error": {
     "title": "Error",

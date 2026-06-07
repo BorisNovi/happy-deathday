@@ -25,4 +25,16 @@ export enum Country {
   IT = 'it',
   NL = 'nl',
   RS = 'rs',
+
+  // Asia
+  CN = 'cn',
+  JP = 'jp',
+  KR = 'kr',
+  SG = 'sg',
+  VN = 'vn',
+  TH = 'th',
+  MY = 'my',
+  ID = 'id',
+  PH = 'ph',
+  IN = 'in',
 }

@@ -37,7 +37,7 @@
     </div>
 
     <div class="create-form__field">
-      <tui-textfield [tuiTextfieldCleaner]="false">
+      <tui-textfield [tuiTextfieldCleaner]="false" [tuiDropdownSheet]="'createCard.form.country.label' | translate">
         <label tuiLabel for="countryCode">{{ 'createCard.form.country.label' | translate }}</label>
         <input
           id="countryCode"
@@ -46,8 +46,13 @@
           [placeholder]="'createCard.form.country.placeholder' | translate"
         />
         <tui-data-list *tuiDropdown>
-          @for (c of countries; track c) {
-            <button tuiOption [value]="c">{{ 'country.' + c | translate }}</button>
+          @for (group of countryGroups; track group.label) {
+            @if (group.label) {
+              <div class="country-group">{{ group.label | translate }}</div>
+            }
+            @for (c of group.codes; track c) {
+              <button tuiOption [value]="c">{{ 'country.' + c | translate }}</button>
+            }
           }
         </tui-data-list>
         <tui-icon [tuiTooltip]="'createCard.form.country.hint' | translate" />

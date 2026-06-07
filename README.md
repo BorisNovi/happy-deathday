@@ -38,7 +38,7 @@ A shareable birthday card that counts down to the recipient's estimated death da
 | Layer     | Technology                                     |
 |-----------|------------------------------------------------|
 | Frontend  | Angular 21 · Taiga UI v5 · ngx-translate v17  |
-| Rendering | Angular SSR — Server per request (`/card/:id`, `/:lang`, `/:lang/create/form`) · Prerender (`/:lang/create/style`) · Client (`/:lang/create/card-preview`) |
+| Rendering | Angular SSR — Server per request (`/card/:id`, `/:lang`) · Client (everything else) |
 | Backend   | ASP.NET Core · .NET 10 · Entity Framework Core |
 | Database  | PostgreSQL 17                                  |
 
@@ -149,8 +149,8 @@ happy-deathday/
 | Path                    | Component     | Render mode | Description                       |
 |-------------------------|---------------|-------------|-----------------------------------|
 | `/:lang`                | CreateIntro   | Server      | Landing page with CTA             |
-| `/:lang/create/form`    | CreateForm    | Server      | Name, birth date, gender, country |
-| `/:lang/create/style`   | CreateStyle   | Prerender   | Style picker                      |
+| `/:lang/create/form`    | CreateForm    | Client      | Name, birth date, gender, country |
+| `/:lang/create/style`   | CreateStyle   | Client      | Style picker                      |
 | `/:lang/create/card-preview` | CardPreview | Client   | Review and submit                 |
 | `/card/:id`             | Card          | Server      | Shareable card with timer         |
 

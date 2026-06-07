@@ -11,5 +11,8 @@ public enum CountryCode
     US, GB, CA, AU,
 
     // Europe
-    DE, FR, PL, ES, IT, NL, RS
+    DE, FR, PL, ES, IT, NL, RS,
+
+    // Asia
+    CN, JP, KR, SG, VN, TH, MY, ID, PH, IN
 }

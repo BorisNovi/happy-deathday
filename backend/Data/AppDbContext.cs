@@ -101,6 +101,36 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
             Row(CountryCode.RS, CardGender.Male,   73.50),
             Row(CountryCode.RS, CardGender.Female, 80.04),
+
+            Row(CountryCode.CN, CardGender.Male,   75.00),
+            Row(CountryCode.CN, CardGender.Female, 80.50),
+
+            Row(CountryCode.JP, CardGender.Male,   81.05),
+            Row(CountryCode.JP, CardGender.Female, 87.09),
+
+            Row(CountryCode.KR, CardGender.Male,   79.90),
+            Row(CountryCode.KR, CardGender.Female, 85.60),
+
+            Row(CountryCode.SG, CardGender.Male,   81.50),
+            Row(CountryCode.SG, CardGender.Female, 85.90),
+
+            Row(CountryCode.VN, CardGender.Male,   71.10),
+            Row(CountryCode.VN, CardGender.Female, 76.30),
+
+            Row(CountryCode.TH, CardGender.Male,   71.00),
+            Row(CountryCode.TH, CardGender.Female, 78.50),
+
+            Row(CountryCode.MY, CardGender.Male,   72.50),
+            Row(CountryCode.MY, CardGender.Female, 77.10),
+
+            Row(CountryCode.ID, CardGender.Male,   69.50),
+            Row(CountryCode.ID, CardGender.Female, 73.50),
+
+            Row(CountryCode.PH, CardGender.Male,   66.00),
+            Row(CountryCode.PH, CardGender.Female, 73.00),
+
+            Row(CountryCode.IN, CardGender.Male,   67.50),
+            Row(CountryCode.IN, CardGender.Female, 70.20),
         ];
     }
 }
