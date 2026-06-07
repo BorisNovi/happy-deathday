@@ -23,15 +23,18 @@
     </div>
 
     <div class="create-form__field">
-      <tui-textfield tuiMobileCalendar>
+      <tui-textfield>
         <label tuiLabel for="birthDate">{{ 'createCard.form.birthDate.label' | translate }}</label>
         <input
           id="birthDate"
+          type="date"
           tuiInputDate
           formControlName="birthDate"
           [max]="maxDate"
         />
-        <tui-calendar *tuiDropdown />
+        @if (!isMobile) {
+          <tui-calendar *tuiDropdown />
+        }
       </tui-textfield>
       <tui-error formControlName="birthDate" />
     </div>

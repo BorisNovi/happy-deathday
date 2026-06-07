@@ -53,3 +53,15 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Design services around a single responsibility
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
+
+## General Rules
+
+- If a framework or library method is unknown or uncertain, do NOT guess — look it up in the official documentation first
+
+## Code Style
+
+- Single-line conditionals and loops are written without curly braces
+- Single-line conditionals are NOT written on one line — move the body to the next line
+- `else if` and `else` always start on a new line
+- Template `@if`/`@else` blocks follow the same rule: single-node blocks with the node on the next line
+- No empty line at the end of a file
