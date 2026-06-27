@@ -47,6 +47,9 @@ docker compose version
 
 # Create project directory
 mkdir -p /opt/happy-deathday
+
+# Create the ACME webroot (used for certificate renewal, see step 3)
+mkdir -p /var/www/certbot
 ```
 
 ---
@@ -55,6 +58,11 @@ mkdir -p /opt/happy-deathday
 
 DNS must be propagated before this step.
 
+### Initial issuance (`--standalone`)
+
+At this point nginx is not running yet, so port 80 is free and we can use the
+standalone authenticator:
+
 ```bash
 apt install certbot -y
 
@@ -62,7 +70,41 @@ certbot certonly --standalone -d happydeathday.app -d www.happydeathday.app
 ```
 
 Certificates are saved to `/etc/letsencrypt/live/happydeathday.app/`.
-Certbot sets up automatic renewal via systemd timer — no manual action needed.
+
+### Switch renewal to `webroot`
+
+> ⚠️ Do **not** leave the cert on `standalone`. Once the stack is deployed,
+> nginx (in Docker) holds port 80, so a `standalone` renewal would fail to bind
+> `:80` (the first issuance works, but `certbot renew` would break in ~60 days).
+> `webroot` renews with no downtime and never touches the port.
+
+Run this **after the first deploy** (step 7), when nginx is up and serving
+`/.well-known/acme-challenge/` from `/var/www/certbot`. It re-runs issuance over
+webroot, which rewrites the cert's renewal config to use the webroot
+authenticator from now on:
+
+```bash
+certbot certonly --webroot -w /var/www/certbot \
+  -d happydeathday.app -d www.happydeathday.app
+```
+
+Then add a deploy hook so nginx picks up the renewed cert automatically:
+
+```bash
+mkdir -p /etc/letsencrypt/renewal-hooks/deploy
+cat > /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh <<'EOF'
+#!/bin/sh
+docker exec happy-deathday-nginx-1 nginx -s reload
+EOF
+chmod +x /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh
+```
+
+Certbot's systemd timer now renews automatically — no further manual action.
+Verify the renewal is configured correctly (no real renewal happens):
+
+```bash
+certbot renew --dry-run
+```
 
 ---
 
@@ -132,6 +174,10 @@ docker compose -f docker-compose.prod.yml ps
 All four containers should be `Up`: `postgres`, `backend`, `frontend`, `nginx`.
 
 Open `https://happydeathday.app` in the browser.
+
+> 🔁 Now that nginx is running, go back to **step 3 → "Switch renewal to
+> `webroot`"** and run it once. Skipping this leaves the cert on `standalone`,
+> which will fail to renew in ~60 days.
 
 ---
 
